@@ -59,6 +59,17 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //navigation library
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+    //Data Store for shared preference
+    implementation("androidx.datastore:datastore-preferences-core:1.1.1")
+
+    // library for horizontal indicator
+    implementation("com.google.accompanist:accompanist-pager:0.30.1")
+    implementation("com.google.accompanist:accompanist-pager-indicators:0.30.1")
+    
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

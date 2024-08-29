@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Speedo Transfer</string>
+    <string name="amount">Amount</string>
+    <string name="confirmation">Confirmation</string>
+    <string name="payment">Payment</string>
+    <string name="amount_description">Send money fast with simple steps. Create account, Confirmation, Payment. Simple.</string>
+    <string name="confirmation_description">Transfer funds instantly to friends and family worldwide, strong shield protecting a money.</string>
+    <string name="payment_description">Enjoy peace of mind with our secure platform  Transfer funds instantly to friends.</string>
 </resources>
