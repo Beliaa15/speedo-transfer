@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.onboarding_screen
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -129,6 +130,6 @@ private fun OnboardingScreenPrev() {
     OnboardingScreen()
 }
 
-fun onScreen() {
-    TODO("Not yet implemented")
+fun OnBoard(){
+    Log.d("trace", "OnBoard")
 }
