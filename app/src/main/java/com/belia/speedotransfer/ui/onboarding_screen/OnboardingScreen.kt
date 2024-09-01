@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnboardingScreen(modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState(
-        pageCount = { 3 }
+        pageCount = { 2 }
     )
     val scope = rememberCoroutineScope()
 
@@ -127,4 +127,8 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun OnboardingScreenPrev() {
     OnboardingScreen()
+}
+
+fun onScreen() {
+    TODO("Not yet implemented")
 }
