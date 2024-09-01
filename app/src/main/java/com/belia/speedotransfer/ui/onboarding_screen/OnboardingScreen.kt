@@ -128,3 +128,9 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
 private fun OnboardingScreenPrev() {
     OnboardingScreen()
 }
+
+
+@Composable
+fun foo(modifier: Modifier = Modifier) {
+    Text(text = "Hello")
+}
