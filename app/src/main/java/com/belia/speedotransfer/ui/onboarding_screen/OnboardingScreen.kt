@@ -23,8 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
@@ -127,9 +129,58 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun OnboardingScreenPrev() {
-    OnboardingScreen()
+    OnBoard2()
 }
 
 fun OnBoard(){
     Log.d("trace", "OnBoard")
+}
+
+@Composable
+fun OnBoard2(modifier: Modifier = Modifier){
+    Column (
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = Color.Red
+            )
+    ) {
+        Text(
+            text = "Hello, my name is mohaned",
+            fontSize = 45.sp,
+            modifier = modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color.White
+        )
+
+        Text(
+            text = "I hate Mohamed Hesham",
+            fontSize = 35.sp,
+            modifier = modifier
+                .padding(16.dp)
+                .fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            color = Color.White
+        )
+
+        Button(
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color.White,
+            ),
+            modifier = modifier.padding(16.dp),
+            onClick = { /*TODO*/ }) {
+            Text(
+                text = "Love Mohamed",
+                fontSize = 20.sp,
+                color = Color.Black,
+                modifier = modifier.padding(8.dp)
+            )
+
+        }
+
+    }
 }
