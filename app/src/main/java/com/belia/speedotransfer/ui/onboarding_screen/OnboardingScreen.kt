@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.onboarding_screen
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -33,7 +34,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnboardingScreen(modifier: Modifier = Modifier) {
     val pagerState = rememberPagerState(
-        pageCount = { 3 }
+        pageCount = { 2 }
     )
     val scope = rememberCoroutineScope()
 
@@ -129,8 +130,6 @@ private fun OnboardingScreenPrev() {
     OnboardingScreen()
 }
 
-
-@Composable
-fun foo(modifier: Modifier = Modifier) {
-    Text(text = "Hello")
+fun OnBoard(){
+    Log.d("trace", "OnBoard")
 }
