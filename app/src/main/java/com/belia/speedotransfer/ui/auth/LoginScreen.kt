@@ -21,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +35,7 @@ import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG100
+import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.RedP75
@@ -94,16 +96,20 @@ fun Login(modifier: Modifier = Modifier) {
             shape = RoundedCornerShape(6.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = RedP300,
-                disabledContainerColor = RedP75,
-                disabledContentColor = GrayG0
-                ),
+                disabledContainerColor = GrayG100,
+                disabledContentColor = GrayG40
+            ),
             enabled = email.isNotBlank() && password.isNotBlank() && validPassword,
             modifier = modifier
                 .fillMaxWidth()
-                .height(60.dp)
                 .padding(bottom = 8.dp),
         ) {
-            Text(text = "Sign In", fontWeight = FontWeight.Medium, fontSize = 16.sp)
+            Text(
+                text = "Sign In",
+                fontWeight = FontWeight.Medium,
+                fontSize = 16.sp,
+                modifier = modifier.padding(vertical = 10.dp)
+            )
         }
 
         Row(

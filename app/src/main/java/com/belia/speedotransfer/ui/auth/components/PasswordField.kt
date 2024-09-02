@@ -55,8 +55,6 @@ fun PasswordTextField(
         textAlign = TextAlign.Start,
         fontSize = 16.sp,
         modifier = modifier.padding(vertical = 8.dp),
-
-
     )
     OutlinedTextField(
         value = tempPassword,
@@ -85,7 +83,7 @@ fun PasswordTextField(
             errorTrailingIconColor = DangerD300,
             cursorColor = GrayG700
         ),
-        shape = RoundedCornerShape(7.dp),
+        shape = RoundedCornerShape(6.dp),
         visualTransformation = if (tempIsPasswordShown) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         trailingIcon = {
@@ -106,7 +104,6 @@ fun PasswordTextField(
     )
 
     Text(text = passwordConstraintsText, color = Color.Red)
-
 }
 
 
@@ -115,20 +112,19 @@ fun passwordConstraints(password: String, onClick: (String) -> Unit) {
     val uppercaseLetter = Regex("[A-Z]")
     val special = Regex("[!\"#\$%&'()*+,-./:;<=>?@\\]^_`{|}~]")
 
-
     val hasLowercaseLetter = lowercaseLetter.containsMatchIn(password)
     val hasUppercaseLetter = uppercaseLetter.containsMatchIn(password)
     val hasSpecial = special.containsMatchIn(password)
     if (password.isBlank())
-        onClick("your password must not be empty")
+        onClick("Your password must not be empty")
     else if (password.length < 6)
-        onClick("your password must be at least 6 characters long ")
+        onClick("Your password must be at least 6 characters long ")
     else if (!hasLowercaseLetter)
-        onClick("your password must have at least 1 lowercase letter")
+        onClick("Your password must have at least 1 lowercase letter")
     else if (!hasUppercaseLetter)
-        onClick("your password must have at least 1 uppercase letter")
+        onClick("Your password must have at least 1 uppercase letter")
     else if (!hasSpecial)
-        onClick("your password must have at least 1 special character")
+        onClick("Your password must have at least 1 special character")
     else
         onClick("")
 }

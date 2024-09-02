@@ -63,7 +63,7 @@ fun EmailTextField(modifier: Modifier = Modifier, onChange: (String) -> Unit) {
             errorTrailingIconColor = DangerD300,
             cursorColor = GrayG700
         ),
-        shape = RoundedCornerShape(7.dp),
+        shape = RoundedCornerShape(6.dp),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         trailingIcon = {
             Icon(
