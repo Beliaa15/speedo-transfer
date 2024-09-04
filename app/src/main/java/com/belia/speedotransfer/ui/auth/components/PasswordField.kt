@@ -48,7 +48,6 @@ fun PasswordTextField(
     isPasswordValid(passwordConstraintsText == "")
     var isFocused by remember { mutableStateOf(false) }
 
-
     Text(
         text = text,
         color = GrayG700,
@@ -102,8 +101,9 @@ fun PasswordTextField(
                 isFocused = tempPassword.isNotBlank()
             },
     )
-
-    Text(text = passwordConstraintsText, color = Color.Red)
+    if (passwordConstraintsText.isNotBlank()) {
+        Text(text = passwordConstraintsText, color = Color.Red)
+    }
 }
 
 
