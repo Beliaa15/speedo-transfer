@@ -32,6 +32,7 @@ import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
+import com.belia.speedotransfer.ui.theme.bodyRegular14
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
@@ -68,7 +69,7 @@ fun PasswordTextField(
                 }
             }
         },
-        placeholder = { Text(text = "Enter your password ") },
+        placeholder = { Text(text = "Enter your password ", style = bodyRegular14) },
         maxLines = 1,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = if (isFocused) GrayG700 else GrayG70,
