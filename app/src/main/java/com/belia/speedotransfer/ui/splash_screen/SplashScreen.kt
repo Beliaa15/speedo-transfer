@@ -14,8 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP500
 import kotlinx.coroutines.delay
 
@@ -44,6 +46,8 @@ fun SplashScreen() {
         Text(
             text = "Speedo Transfer",
             fontSize = 45.sp,
+            fontFamily = InterFontFamily,
+            fontWeight = FontWeight.W400,
             color = Color.White,
             modifier = Modifier.scale(scale.value)
         )
