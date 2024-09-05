@@ -29,6 +29,7 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -46,7 +47,12 @@ import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.GrayG900
+import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
+import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.ui.theme.buttonMedium
+import com.belia.speedotransfer.ui.theme.linkMedium
+import com.belia.speedotransfer.ui.theme.titleMedium
 
 
 @Composable
@@ -72,9 +78,8 @@ fun SignUp(modifier: Modifier = Modifier) {
         Text(
             text = "Sign Up",
             color = GrayG900,
-            fontSize = 22.sp,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelMedium,
+            style = titleMedium,
             modifier = modifier
                 .fillMaxWidth()
         )
@@ -83,8 +88,9 @@ fun SignUp(modifier: Modifier = Modifier) {
 
         Text(
             text = "Speedo Transfer",
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.W600,
             fontSize = 24.sp,
+            fontFamily = InterFontFamily,
             color = GrayG900,
             textAlign = TextAlign.Center,
             modifier = modifier.fillMaxWidth()
@@ -96,7 +102,7 @@ fun SignUp(modifier: Modifier = Modifier) {
             text = "Full Name",
             color = GrayG700,
             textAlign = TextAlign.Start,
-            fontSize = 16.sp,
+            style = bodyRegular16,
             modifier = modifier.padding(vertical = 8.dp)
         )
         OutlinedTextField(
@@ -167,8 +173,7 @@ fun SignUp(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Sign up",
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
+                style = buttonMedium,
                 modifier = modifier.padding(vertical = 10.dp)
             )
         }
@@ -182,13 +187,12 @@ fun SignUp(modifier: Modifier = Modifier) {
             Text(
                 text = "Already have an account? ",
                 color = GrayG100,
-                fontSize = 16.sp
+                style = bodyRegular16,
             )
             Text(
                 text = "Sign In",
                 color = RedP300,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
+                style = linkMedium,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier
                     .padding(start = 2.dp)
