@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
+import com.belia.speedotransfer.ui.theme.buttonMedium
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -65,6 +66,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Skip",
+                style = buttonMedium,
                 color = GrayG900
             )
         }
@@ -118,7 +120,10 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                 containerColor = RedP300
             )
         ) {
-            Text("Next")
+            Text(
+                text = "Next",
+                style = buttonMedium,
+            )
         }
     }
 }

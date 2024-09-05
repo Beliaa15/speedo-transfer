@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,15 +17,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
-import com.belia.speedotransfer.ui.theme.RedP500
 import com.belia.speedotransfer.ui.theme.RedP75
+import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.ui.theme.heading3
 import com.google.accompanist.pager.HorizontalPagerIndicator
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -64,14 +63,13 @@ fun OnBoardingScreenDesign(
 
         Text(
             text = stringResource(id = title),
-            style = MaterialTheme.typography.titleLarge,
-            fontWeight = FontWeight.SemiBold,
+            style = heading3,
             modifier = modifier.padding(16.dp),
             color = GrayG900
         )
         Text(
             text = stringResource(id = description),
-            style = MaterialTheme.typography.bodyLarge,
+            style = bodyRegular16,
             modifier = modifier.padding(16.dp),
             textAlign = TextAlign.Center,
             color = GrayG900
