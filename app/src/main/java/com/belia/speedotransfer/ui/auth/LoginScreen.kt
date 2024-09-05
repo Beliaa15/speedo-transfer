@@ -39,6 +39,11 @@ import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.RedP75
+import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.ui.theme.buttonMedium
+import com.belia.speedotransfer.ui.theme.linkMedium
+import com.belia.speedotransfer.ui.theme.titleMedium
+import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 
 @Composable
@@ -57,9 +62,8 @@ fun Login(modifier: Modifier = Modifier) {
         Text(
             text = "Sign In",
             color = GrayG900,
-            fontSize = 22.sp,
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.labelMedium,
+            style = titleMedium ,
             modifier = modifier
                 .fillMaxWidth()
         )
@@ -68,10 +72,9 @@ fun Login(modifier: Modifier = Modifier) {
 
         Text(
             text = "Speedo Transfer",
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 24.sp,
             color = GrayG900,
             textAlign = TextAlign.Center,
+            style = titleSemiBold,
             modifier = modifier.fillMaxWidth()
         )
 
@@ -106,8 +109,7 @@ fun Login(modifier: Modifier = Modifier) {
         ) {
             Text(
                 text = "Sign In",
-                fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
+                style = buttonMedium,
                 modifier = modifier.padding(vertical = 10.dp)
             )
         }
@@ -121,13 +123,12 @@ fun Login(modifier: Modifier = Modifier) {
             Text(
                 text = "Don’t have an account? ",
                 color = GrayG100,
-                fontSize = 16.sp
+                style = bodyRegular16
             )
             Text(
                 text = "Sign Up",
                 color = RedP300,
-                fontSize = 16.sp,
-                fontWeight = FontWeight.Medium,
+                style = linkMedium,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier
                     .padding(start = 2.dp)

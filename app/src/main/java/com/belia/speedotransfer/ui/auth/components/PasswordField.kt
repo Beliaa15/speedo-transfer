@@ -32,6 +32,7 @@ import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
+import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
 fun PasswordTextField(
@@ -53,7 +54,7 @@ fun PasswordTextField(
         text = text,
         color = GrayG700,
         textAlign = TextAlign.Start,
-        fontSize = 16.sp,
+        style = bodyRegular16,
         modifier = modifier.padding(vertical = 8.dp),
     )
     OutlinedTextField(
