@@ -40,6 +40,7 @@ import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.ui.theme.buttonMedium
 import com.belia.speedotransfer.ui.theme.heading3
 import com.belia.speedotransfer.ui.theme.linkMedium
 
@@ -112,18 +113,22 @@ fun SecondSignUp(modifier: Modifier = Modifier) {
 
             Button(
                 onClick = {},
-                shape = RoundedCornerShape(8.dp),
-                modifier = modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
+                shape = RoundedCornerShape(6.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = RedP300,
                     disabledContainerColor = GrayG100,
                     disabledContentColor = GrayG40
                 ),
-                enabled = date.isNotBlank() && countryName.isNotBlank()
+                enabled = date.isNotBlank() && countryName.isNotBlank(),
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
             ) {
-                Text(text = "Continue", color = GrayG0)
+                Text(
+                    text = "Continue",
+                    style = buttonMedium,
+                    modifier = modifier.padding(vertical = 10.dp)
+                )
             }
             Row(
                 horizontalArrangement = Arrangement.Center,
