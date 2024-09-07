@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.common_ui
+package com.belia.speedotransfer.ui.auth.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
