@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.common_ui
+package com.belia.speedotransfer.ui.auth.components
 
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,6 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.ui.theme.titleMedium
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,8 +28,7 @@ fun TopBar(
         title = {
             Text(
                 text = title,
-                style = MaterialTheme.typography.titleMedium,
-                fontSize = 20.sp,
+                style = titleMedium,
             )
         },
         navigationIcon = {
