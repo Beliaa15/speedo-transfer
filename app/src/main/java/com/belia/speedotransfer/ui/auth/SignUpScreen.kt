@@ -11,15 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,33 +20,24 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
-import com.belia.speedotransfer.ui.auth.components.NameField
+import com.belia.speedotransfer.ui.auth.components.NameTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.BottomRose
-import com.belia.speedotransfer.ui.theme.DangerD300
-import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG100
-import com.belia.speedotransfer.ui.theme.GrayG40
-import com.belia.speedotransfer.ui.theme.GrayG70
-import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
-import com.belia.speedotransfer.ui.theme.buttonMedium
 import com.belia.speedotransfer.ui.theme.linkMedium
 import com.belia.speedotransfer.ui.theme.titleMedium
 
@@ -66,8 +50,6 @@ fun SignUp(modifier: Modifier = Modifier) {
     var confirmPassword by remember { mutableStateOf("") }
     var isPasswordShown by remember { mutableStateOf(false) }
     var validPassword by remember { mutableStateOf(false) }
-    var isFocused by remember { mutableStateOf(false) }
-
     val passwordsMatch = password == confirmPassword
 
     Column(
@@ -102,7 +84,7 @@ fun SignUp(modifier: Modifier = Modifier) {
         )
 
         Spacer(modifier = modifier.height(55.dp))
-        NameField {
+        NameTextField {
             name = it
         }
         EmailTextField() {

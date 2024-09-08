@@ -26,7 +26,7 @@ import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
-fun NameField(modifier: Modifier = Modifier, onChange: (String) -> Unit) {
+fun NameTextField(modifier: Modifier = Modifier, onChange: (String) -> Unit) {
     var name by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
