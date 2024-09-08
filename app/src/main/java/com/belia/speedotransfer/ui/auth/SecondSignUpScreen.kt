@@ -26,10 +26,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
+import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.GrayG0
@@ -88,6 +90,7 @@ fun SecondSignUp(modifier: Modifier = Modifier) {
                 textAlign = TextAlign.Center,
                 style = heading3
             )
+
             Spacer(modifier = modifier.padding(6.dp))
 
             Text(
@@ -111,25 +114,8 @@ fun SecondSignUp(modifier: Modifier = Modifier) {
 
             Spacer(modifier = modifier.padding(12.dp))
 
-            Button(
-                onClick = {},
-                shape = RoundedCornerShape(6.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = RedP300,
-                    disabledContainerColor = GrayG100,
-                    disabledContentColor = GrayG40
-                ),
-                enabled = date.isNotBlank() && countryName.isNotBlank(),
-                modifier = modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 8.dp),
-            ) {
-                Text(
-                    text = "Continue",
-                    style = buttonMedium,
-                    modifier = modifier.padding(vertical = 10.dp)
-                )
-            }
+            RedButton(text = "Continue", onClick = { /*TODO*/ }, isEnabled = date.isNotBlank() && countryName.isNotBlank() )
+
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = modifier
@@ -151,7 +137,12 @@ fun SecondSignUp(modifier: Modifier = Modifier) {
                         .clickable { /*TODO go to Sign up*/ }
                 )
             }
-
         }
     }
+}
+
+@Preview
+@Composable
+private fun prevvvv() {
+    SecondSignUp()
 }

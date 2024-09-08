@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
+import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG100
@@ -68,7 +69,7 @@ fun Login(modifier: Modifier = Modifier) {
             text = "Sign In",
             color = GrayG900,
             textAlign = TextAlign.Center,
-            style = titleMedium ,
+            style = titleMedium,
             modifier = modifier
                 .fillMaxWidth()
         )
@@ -98,26 +99,11 @@ fun Login(modifier: Modifier = Modifier) {
 
         Spacer(modifier = modifier.height(16.dp))
 
-
-        Button(
-            onClick = {/* TODO go to main screen*/ },
-            shape = RoundedCornerShape(6.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = RedP300,
-                disabledContainerColor = GrayG100,
-                disabledContentColor = GrayG40
-            ),
-            enabled = email.isNotBlank() && password.isNotBlank() && validPassword,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-        ) {
-            Text(
-                text = "Sign In",
-                style = buttonMedium,
-                modifier = modifier.padding(vertical = 10.dp)
-            )
-        }
+        RedButton(
+            text = "Sign in",
+            onClick = { /*TODO*/ },
+            isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
+        )
 
         Row(
             horizontalArrangement = Arrangement.Center,

@@ -2,8 +2,6 @@ package com.belia.speedotransfer.ui.auth
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.rememberScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,7 +18,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -34,7 +31,6 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
@@ -43,7 +39,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
+import com.belia.speedotransfer.ui.auth.components.NameField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
+import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
@@ -104,49 +102,9 @@ fun SignUp(modifier: Modifier = Modifier) {
         )
 
         Spacer(modifier = modifier.height(55.dp))
-
-        Text(
-            text = "Full Name",
-            color = GrayG700,
-            textAlign = TextAlign.Start,
-            style = bodyRegular16,
-            modifier = modifier.padding(vertical = 8.dp)
-        )
-        OutlinedTextField(
-            value = name,
-            onValueChange = {
-                name = it
-            },
-            placeholder = { Text(text = "Enter your email address") },
-            maxLines = 1,
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = if (isFocused) GrayG700 else GrayG70,
-                unfocusedTrailingIconColor = if (isFocused) GrayG700 else GrayG70,
-                unfocusedLabelColor = if (isFocused) GrayG700 else GrayG70,
-                unfocusedContainerColor = GrayG10,
-                unfocusedPlaceholderColor = GrayG70,
-                focusedBorderColor = GrayG700,
-                focusedContainerColor = GrayG10,
-                focusedTrailingIconColor = GrayG700,
-                focusedLabelColor = GrayG700,
-                errorContainerColor = DangerD300,
-                errorTrailingIconColor = DangerD300,
-                cursorColor = GrayG700
-            ),
-            shape = RoundedCornerShape(6.dp),
-            trailingIcon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.user),
-                    contentDescription = "Full Name icon",
-                    modifier = Modifier.size(24.dp),
-                )
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .onFocusChanged {
-                    isFocused = name.isNotBlank()
-                },
-        )
+        NameField {
+            name = it
+        }
         EmailTextField() {
             email = it
         }
@@ -165,25 +123,12 @@ fun SignUp(modifier: Modifier = Modifier) {
             validPassword = it
         }
         Spacer(modifier = modifier.height(32.dp))
-        Button(
-            onClick = {/* TODO go to main screen*/ },
-            shape = RoundedCornerShape(6.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = RedP300,
-                disabledContainerColor = GrayG100,
-                disabledContentColor = GrayG40
-            ),
-            enabled = email.isNotBlank() && password.isNotBlank() && validPassword && passwordsMatch,
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(bottom = 8.dp),
-        ) {
-            Text(
-                text = "Sign up",
-                style = buttonMedium,
-                modifier = modifier.padding(vertical = 10.dp)
-            )
-        }
+
+        RedButton(
+            text = "Sign up",
+            onClick = { /*TODO*/ },
+            isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword && passwordsMatch
+        )
 
         Row(
             horizontalArrangement = Arrangement.Center,
