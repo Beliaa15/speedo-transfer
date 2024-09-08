@@ -37,7 +37,6 @@ fun RedButton(
         enabled = isEnabled,
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
     ) {
         Text(
             text = text,
@@ -80,5 +79,5 @@ fun EmptyButton(
 @Composable
 private fun ButtonPreview() {
     // EmptyButton("Continue", {})
-    RedButton("Continue", {})
+    RedButton("Continue", {}, isEnabled = false)
 }
