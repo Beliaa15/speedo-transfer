@@ -79,7 +79,7 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
         NavigationBar(
             containerColor = GrayG0,
             modifier = modifier
-                //.background(color = Color.Transparent)
+            //.background(color = Color.Transparent)
         ) {
             navigationItems.forEachIndexed { index, item ->
                 NavigationBarItem(
