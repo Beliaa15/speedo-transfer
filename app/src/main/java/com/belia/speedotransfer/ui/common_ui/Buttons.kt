@@ -37,7 +37,6 @@ fun RedButton(
         enabled = isEnabled,
         modifier = modifier
             .fillMaxWidth()
-            .padding(16.dp),
     ) {
         Text(
             text = text,
