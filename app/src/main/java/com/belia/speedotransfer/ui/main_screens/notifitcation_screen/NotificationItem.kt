@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.notifitcation_screen
+package com.belia.speedotransfer.ui.main_screens.notifitcation_screen
 
 import android.app.Notification
 import androidx.compose.foundation.Image
