@@ -15,7 +15,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         createNotificationChannel(this)
         setContent {
-            SpeedoTransferTheme {
+            SpeedoTransferTheme (darkTheme = false) {
                 /*TODO
                    Add appNavigation host to start everything
                 */

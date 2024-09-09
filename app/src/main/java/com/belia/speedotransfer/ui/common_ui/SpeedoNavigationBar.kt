@@ -1,0 +1,118 @@
+package com.belia.speedotransfer.ui.common_ui
+
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.belia.speedotransfer.R
+import com.belia.speedotransfer.ui.theme.GrayG0
+import com.belia.speedotransfer.ui.theme.GrayG200
+import com.belia.speedotransfer.ui.theme.InterFontFamily
+import com.belia.speedotransfer.ui.theme.RedP300
+import com.belia.speedotransfer.ui.theme.smallRegular
+
+data class BottomNavigationItem(
+    val title: String,
+    val icon: ImageVector,
+)
+
+@Composable
+fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
+    val navigationItems = listOf(
+        BottomNavigationItem(
+            title = "Home",
+            icon = ImageVector.vectorResource(id = R.drawable.ic_nav_home)
+        ),
+        BottomNavigationItem(
+            title = "Transfer",
+            icon = ImageVector.vectorResource(id = R.drawable.ic_nav_transfer)
+        ),
+        BottomNavigationItem(
+            title = "Transactions",
+            icon = ImageVector.vectorResource(id = R.drawable.ic_nav_transcations)
+        ),
+        BottomNavigationItem(
+            title = "My cards",
+            icon = ImageVector.vectorResource(id = R.drawable.ic_nav_mycards)
+        ),
+        BottomNavigationItem(
+            title = "More",
+            icon = ImageVector.vectorResource(id = R.drawable.ic_nav_more)
+        )
+    )
+
+    val selectedItem by rememberSaveable {
+        mutableIntStateOf(selectedIndex)
+    }
+
+    Surface(
+        color = GrayG0,
+        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+        modifier = Modifier.height(83.dp)
+    ) {
+        NavigationBar(
+            containerColor = GrayG0,
+            modifier = modifier
+            //.background(color = Color.Transparent)
+        ) {
+            navigationItems.forEachIndexed { index, item ->
+                NavigationBarItem(
+                    selected = index == selectedItem,
+                    onClick = { /*TODO*/ },
+                    icon = {
+                        Icon(
+                            imageVector = item.icon,
+                            contentDescription = item.title,
+                            tint = if (index == selectedItem) RedP300 else GrayG200,
+                        )
+                    },
+                    label = {
+                        Text(
+                            text = item.title,
+                            color = if (index == selectedItem) RedP300 else GrayG200,
+                            fontFamily = InterFontFamily,
+                            fontWeight = FontWeight.Medium,
+                            maxLines = 1,
+                        )
+                    },
+                    alwaysShowLabel = true,
+                    colors = NavigationBarItemDefaults.colors(
+                        indicatorColor = Color.Transparent,
+                    ),
+                    //modifier = modifier.width(150.dp)
+                )
+            }
+        }
+    }
+}
+@Preview(showSystemUi = false, showBackground = true)
+@Composable
+private fun SpeedoNavigationBarPrev() {
+    SpeedoNavigationBar(selectedIndex = 0)
+}
