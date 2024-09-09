@@ -31,7 +31,10 @@ import com.belia.speedotransfer.ui.theme.bodyRegular14
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 @Composable
-fun TopSection(modifier: Modifier = Modifier) {
+fun TopSection(
+    name: String,
+    modifier: Modifier = Modifier
+) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -52,7 +55,7 @@ fun TopSection(modifier: Modifier = Modifier) {
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "AD",
+                    text = getInitials(name),
                     color = GrayG100,
                     modifier = modifier.padding(4.dp),
                     style = titleSemiBold
@@ -67,7 +70,7 @@ fun TopSection(modifier: Modifier = Modifier) {
                 )
                 Spacer(modifier = modifier.height(4.dp))
                 Text(
-                    text = "Asmaa Dosuky",
+                    text = name,
                     style = bodyMedium16,
                     color = GrayG900
                 )
@@ -82,8 +85,14 @@ fun TopSection(modifier: Modifier = Modifier) {
     }
 }
 
+fun getInitials(name: String): String {
+    val words = name.split(" ")
+    val initials = words.take(2).mapNotNull { it.firstOrNull()?.toString()?.uppercase() }
+    return initials.joinToString("")
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun TopSectionPrev() {
-    TopSection()
+    TopSection(name = "Asmaa Dosuky")
 }

@@ -20,7 +20,10 @@ import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.heading2
 
 @Composable
-fun BalanceCard(modifier: Modifier = Modifier) {
+fun BalanceCard(
+    amount: Float,
+    modifier: Modifier = Modifier
+) {
     Card (
         modifier = modifier
             .fillMaxWidth()
@@ -43,7 +46,7 @@ fun BalanceCard(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = modifier.size(12.dp))
             Text(
-                text = "10000 EGP",
+                text = "${amount.toInt()} EGP",
                 color = Color(0xFFFFFFFF),
                 style = heading2
             )
@@ -54,5 +57,5 @@ fun BalanceCard(modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 private fun BalanceCardPreview() {
-    BalanceCard()
+    BalanceCard(10000f)
 }

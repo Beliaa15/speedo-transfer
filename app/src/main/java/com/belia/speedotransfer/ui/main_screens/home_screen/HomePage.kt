@@ -31,8 +31,8 @@ fun HomePage(modifier: Modifier = Modifier) {
                 .padding(top = innerPadding.calculateTopPadding())
         )
         {
-            TopSection()
-            BalanceCard()
+            TopSection(name = "Mohaned Emad")
+            BalanceCard(1000f)
             RecentTransactions()
         }
 
