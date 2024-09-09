@@ -32,6 +32,8 @@ import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
+import com.belia.speedotransfer.ui.theme.bodyRegular14
+import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
 fun PasswordTextField(
@@ -48,15 +50,12 @@ fun PasswordTextField(
     isPasswordValid(passwordConstraintsText == "")
     var isFocused by remember { mutableStateOf(false) }
 
-
     Text(
         text = text,
         color = GrayG700,
         textAlign = TextAlign.Start,
-        fontSize = 16.sp,
+        style = bodyRegular16,
         modifier = modifier.padding(vertical = 8.dp),
-
-
     )
     OutlinedTextField(
         value = tempPassword,
@@ -69,7 +68,7 @@ fun PasswordTextField(
                 }
             }
         },
-        placeholder = { Text(text = "Enter your password ") },
+        placeholder = { Text(text = "Enter your password ", style = bodyRegular14) },
         maxLines = 1,
         colors = OutlinedTextFieldDefaults.colors(
             unfocusedBorderColor = if (isFocused) GrayG700 else GrayG70,
@@ -85,7 +84,7 @@ fun PasswordTextField(
             errorTrailingIconColor = DangerD300,
             cursorColor = GrayG700
         ),
-        shape = RoundedCornerShape(7.dp),
+        shape = RoundedCornerShape(6.dp),
         visualTransformation = if (tempIsPasswordShown) VisualTransformation.None else PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         trailingIcon = {
@@ -104,9 +103,9 @@ fun PasswordTextField(
                 isFocused = tempPassword.isNotBlank()
             },
     )
-
-    Text(text = passwordConstraintsText, color = Color.Red)
-
+    if (passwordConstraintsText.isNotBlank()) {
+        Text(text = passwordConstraintsText, color = Color.Red)
+    }
 }
 
 
@@ -115,20 +114,19 @@ fun passwordConstraints(password: String, onClick: (String) -> Unit) {
     val uppercaseLetter = Regex("[A-Z]")
     val special = Regex("[!\"#\$%&'()*+,-./:;<=>?@\\]^_`{|}~]")
 
-
     val hasLowercaseLetter = lowercaseLetter.containsMatchIn(password)
     val hasUppercaseLetter = uppercaseLetter.containsMatchIn(password)
     val hasSpecial = special.containsMatchIn(password)
     if (password.isBlank())
-        onClick("your password must not be empty")
+        onClick("Your password must not be empty")
     else if (password.length < 6)
-        onClick("your password must be at least 6 characters long ")
+        onClick("Your password must be at least 6 characters long ")
     else if (!hasLowercaseLetter)
-        onClick("your password must have at least 1 lowercase letter")
+        onClick("Your password must have at least 1 lowercase letter")
     else if (!hasUppercaseLetter)
-        onClick("your password must have at least 1 uppercase letter")
+        onClick("Your password must have at least 1 uppercase letter")
     else if (!hasSpecial)
-        onClick("your password must have at least 1 special character")
+        onClick("Your password must have at least 1 special character")
     else
         onClick("")
 }
