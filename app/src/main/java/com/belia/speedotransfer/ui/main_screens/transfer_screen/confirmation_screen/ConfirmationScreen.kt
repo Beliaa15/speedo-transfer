@@ -1,6 +1,5 @@
-package com.belia.speedotransfer.ui.transfer_screen.payment_screen
+package com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -28,11 +26,13 @@ import com.belia.speedotransfer.ui.common_ui.StepProgressIndicator
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.common_ui.TotalAmount
 import com.belia.speedotransfer.ui.common_ui.TransferSection
+import com.belia.speedotransfer.ui.theme.GrayG500
 import com.belia.speedotransfer.ui.theme.GrayG900
+import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 @Composable
-fun PaymentScreen(
+fun ConfirmationScreen(
     amount: Float,
     name: String,
     account: String,
@@ -60,45 +60,50 @@ fun PaymentScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
         ) {
-            StepProgressIndicator(currentStep = 3)
-            Image(painter = painterResource(
-                id = R.drawable.ic_confirmation),
-                contentDescription = "Hello",
-                modifier = modifier.padding(8.dp)
-            )
+            StepProgressIndicator(currentStep = 2)
+            Spacer(modifier = modifier.padding(12.dp))
             Text(
-                text = "Your transfer was successful",
+                text = "${amount.toInt()} EGP",
                 style = titleSemiBold,
                 color = GrayG900,
                 modifier = modifier.padding(8.dp)
             )
+            Text(
+                text = "Transfer amount",
+                style = bodyRegular16,
+                color = GrayG500,
+                modifier = modifier.padding(4.dp)
+            )
+            TotalAmount(amount = amount)
+
             TransferSection(
                 fromName = "Asmaa Dosuky",
                 fromAccountNum = "xxxx7890",
                 toName = name,
                 toAccountNum = account,
-                image = R.drawable.ic_success
+                image = R.drawable.ic_transfer
             )
-            Spacer(modifier = Modifier.padding(4.dp))
-            TotalAmount(amount = amount)
+
             RedButton(
-                text = "Back to Home",
+                text = "Confirm",
                 onClick = {
-                    // navController.popBackStack(route = AMOUNT, inclusive = false)
-                    // TODO: Pop back stack to home screen
+                    // navController.navigate("$PAYMENT/$amount/$name/$account")
+                    // TODO: Add navigation to payment screen
                 }
             )
             EmptyButton(
-                text = "Add to Favourites",
-                onClick = { /*TODO* go to favourites screen */ }
+                text = "Previous",
+                onClick = {
+                    // navController.navigate(AMOUNT)
+                    // TODO: Add navigation to amount screen
+                }
             )
-            Spacer(modifier = modifier.padding(16.dp))
         }
     }
 }
 
-@Preview
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
-private fun PaymentScreenPrev() {
-    PaymentScreen(amount = 1000f, "Jonathan Smith", "xxxx7890", navController = rememberNavController())
+private fun TransferScreenPreview() {
+    ConfirmationScreen(amount = 1000f, "Jonathan Smith", "xxxx7890", rememberNavController())
 }

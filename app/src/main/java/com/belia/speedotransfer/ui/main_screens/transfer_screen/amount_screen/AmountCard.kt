@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.transfer_screen.amount_screen
+package com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
