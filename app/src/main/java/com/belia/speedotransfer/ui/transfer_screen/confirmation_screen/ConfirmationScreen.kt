@@ -21,6 +21,7 @@ import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
+import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.StepProgressIndicator
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.common_ui.TotalAmount
@@ -41,6 +42,9 @@ fun ConfirmationScreen(
     Scaffold (
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+        },
+        bottomBar = {
+            SpeedoNavigationBar(selectedIndex = 1)
         }
     ) {
             innerPadding ->

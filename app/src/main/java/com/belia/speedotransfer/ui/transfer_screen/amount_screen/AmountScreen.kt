@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.RedButton
+import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.StepProgressIndicator
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.titleSemiBold
@@ -43,9 +45,12 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold(
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+        },
+        bottomBar = {
+            SpeedoNavigationBar(selectedIndex = 1)
         }
     ) {
-            innerPadding ->
+        innerPadding ->
         Column(
             modifier = modifier
                 .fillMaxSize()
