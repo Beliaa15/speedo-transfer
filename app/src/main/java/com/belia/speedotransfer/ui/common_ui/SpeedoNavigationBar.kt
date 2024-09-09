@@ -111,7 +111,7 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
         }
     }
 }
-@Preview(showSystemUi = false, showBackground = false)
+@Preview(showSystemUi = false, showBackground = true)
 @Composable
 private fun SpeedoNavigationBarPrev() {
     SpeedoNavigationBar(selectedIndex = 0)
