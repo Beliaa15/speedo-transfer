@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.titleSemiBold
@@ -25,6 +26,9 @@ fun LastTransactions(modifier: Modifier = Modifier) {
     Scaffold (
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transactions")
+        },
+        bottomBar = {
+            SpeedoNavigationBar(selectedIndex = 2)
         }
     ) {
         innerPadding ->
@@ -37,7 +41,7 @@ fun LastTransactions(modifier: Modifier = Modifier) {
                         colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
                     )
                 )
-                .padding(innerPadding)
+                .padding(top = innerPadding.calculateTopPadding())
         ) {
             Text(
                 text = "Your Last Transactions",
