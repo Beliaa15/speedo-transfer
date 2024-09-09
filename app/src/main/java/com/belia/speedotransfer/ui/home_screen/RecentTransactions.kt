@@ -60,7 +60,7 @@ fun RecentTransactions(modifier: Modifier = Modifier) {
                 .clip(RoundedCornerShape(8.dp))
         ) {
             LazyColumn {
-                items(10) {
+                items(5) {
                     TransactionItem(
                         name = "Ahmed Mohamed",
                         cardDetails = "Visa . Master Card . 1234",

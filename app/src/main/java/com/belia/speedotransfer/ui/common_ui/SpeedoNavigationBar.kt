@@ -77,8 +77,9 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
         modifier = Modifier.height(83.dp)
     ) {
         NavigationBar(
+            containerColor = GrayG0,
             modifier = modifier
-                //.background(color = Color.Transparent)
+            //.background(color = Color.Transparent)
         ) {
             navigationItems.forEachIndexed { index, item ->
                 NavigationBarItem(
@@ -110,7 +111,7 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
         }
     }
 }
-@Preview(showSystemUi = false)
+@Preview(showSystemUi = false, showBackground = true)
 @Composable
 private fun SpeedoNavigationBarPrev() {
     SpeedoNavigationBar(selectedIndex = 0)
