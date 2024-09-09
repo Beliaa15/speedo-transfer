@@ -86,11 +86,13 @@ fun PaymentScreen(
                 onClick = {
                     // navController.popBackStack(route = AMOUNT, inclusive = false)
                     // TODO: Pop back stack to home screen
-                }
+                },
+                modifier = modifier.padding(horizontal = 16.dp)
             )
+            Spacer(modifier = modifier.padding(8.dp))
             EmptyButton(
                 text = "Add to Favourites",
-                onClick = { /*TODO* go to favourites screen */ }
+                onClick = { /*TODO* go to favourites screen */ },
             )
             Spacer(modifier = modifier.padding(16.dp))
         }

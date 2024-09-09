@@ -84,7 +84,8 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
                     // navController.navigate("$CONFIRMATION/$amount/$recipientName/$recipientAccount")
                     // TODO: Add navigation to confirmation screen
                 },
-                isEnabled = isButtonEnabled
+                isEnabled = isButtonEnabled,
+                modifier = modifier.padding(horizontal = 16.dp)
             )
         }
     }

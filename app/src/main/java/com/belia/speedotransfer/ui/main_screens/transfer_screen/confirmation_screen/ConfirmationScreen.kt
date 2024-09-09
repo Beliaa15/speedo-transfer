@@ -89,8 +89,10 @@ fun ConfirmationScreen(
                 onClick = {
                     // navController.navigate("$PAYMENT/$amount/$name/$account")
                     // TODO: Add navigation to payment screen
-                }
+                },
+                modifier = modifier.padding(horizontal = 16.dp)
             )
+            Spacer(modifier = modifier.padding(8.dp))
             EmptyButton(
                 text = "Previous",
                 onClick = {
