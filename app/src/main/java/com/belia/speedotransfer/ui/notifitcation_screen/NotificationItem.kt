@@ -6,6 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -84,13 +85,13 @@ fun NotificationItem(
                     color = GrayG900,
                     style = bodyMedium16
                 )
-
+                Spacer(modifier = modifier.size(4.dp))
                 Text(
-                    text = "You have $type $amount EGP from $name $account",
+                    text = "You have $type ${amount.toInt()} EGP from $name $account",
                     color = GrayG700,
                     style = bodyRegular14
                 )
-
+                Spacer(modifier = modifier.size(4.dp))
                 Text(
                     text = "$date $time",
                     color = GrayG100,
