@@ -22,6 +22,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.common_ui.TransferSection
 import com.belia.speedotransfer.ui.theme.GrayG700
@@ -46,6 +47,9 @@ fun Transaction(
     Scaffold(
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "$transactionStatus Transactions")
+        },
+        bottomBar = {
+            SpeedoNavigationBar(selectedIndex = 2)
         }
     ) {
         innerPadding ->
