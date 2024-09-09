@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.home_screen
+package com.belia.speedotransfer.ui.main_screens.home_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
