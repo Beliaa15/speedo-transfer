@@ -41,6 +41,7 @@ fun NameTextField(modifier: Modifier = Modifier, onChange: (String) -> Unit) {
         value = name,
         onValueChange = {
             name = it
+            onChange(it)
         },
         placeholder = { Text(text = "Enter your email address") },
         maxLines = 1,

@@ -76,7 +76,7 @@ fun DatePicker(modifier: Modifier = Modifier, onClick: (String) -> Unit) {
         },
         modifier = modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp)
+            .padding(bottom = 8.dp)
             .clickable { isFocused = true },
     )
     if (isFocused) {

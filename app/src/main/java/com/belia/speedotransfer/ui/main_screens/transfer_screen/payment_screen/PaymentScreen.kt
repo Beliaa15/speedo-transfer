@@ -93,6 +93,7 @@ fun PaymentScreen(
             EmptyButton(
                 text = "Add to Favourites",
                 onClick = { /*TODO* go to favourites screen */ },
+                modifier = modifier.padding(horizontal = 16.dp)
             )
             Spacer(modifier = modifier.padding(16.dp))
         }

@@ -98,7 +98,8 @@ fun ConfirmationScreen(
                 onClick = {
                     // navController.navigate(AMOUNT)
                     // TODO: Add navigation to amount screen
-                }
+                },
+                modifier = modifier.padding(horizontal = 16.dp)
             )
         }
     }

@@ -36,7 +36,7 @@ fun NoInternetScreen() {
                     colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
                 )
             )
-            .padding(vertical = 36.dp),
+            .padding(vertical = 36.dp, horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {

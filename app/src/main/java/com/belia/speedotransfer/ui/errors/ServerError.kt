@@ -1,22 +1,15 @@
 package com.belia.speedotransfer.ui.errors
 
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -24,16 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.GrayG900
-import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.heading3
 
@@ -48,7 +38,7 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
                     colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
                 )
             )
-            .padding(vertical = 36.dp),
+            .padding(vertical = 36.dp, horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
@@ -63,7 +53,6 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
             style = heading3,
             color = GrayG900,
             textAlign = TextAlign.Center,
-            modifier = Modifier.fillMaxWidth(0.8f)
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(
@@ -74,6 +63,7 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
         )
         Spacer(modifier = Modifier.height(32.dp))
         RedButton(text = "Call Us", onClick = { /*TODO*/ })
+        Spacer(modifier = modifier.height(12.dp))
         EmptyButton(text = "Message Us", onClick = { /*TODO*/ })
     }
 }

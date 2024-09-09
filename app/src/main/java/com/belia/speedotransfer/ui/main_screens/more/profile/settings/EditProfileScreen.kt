@@ -3,7 +3,9 @@ package com.belia.speedotransfer.ui.main_screens.more.profile.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -18,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
+import com.belia.speedotransfer.ui.auth.components.NameTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 
@@ -52,6 +55,9 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                     ),
             ) {
                 //TODO(Add NameField after merging)
+                NameTextField {
+                    name = it
+                }
                 EmailTextField {
                     email = it
                 }
@@ -61,7 +67,12 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
                 DatePicker {
                     date = it
                 }
-                RedButton(text = "Save", onClick = { /*TODO*/ }, isEnabled = true)
+                Spacer(modifier = modifier.height(24.dp))
+                RedButton(
+                    text = "Save",
+                    onClick = { /*TODO*/ },
+                    isEnabled = name.isNotBlank() && email.isNotBlank() && countryName.isNotBlank() && date.isNotBlank()
+                )
             }
         }
     }
