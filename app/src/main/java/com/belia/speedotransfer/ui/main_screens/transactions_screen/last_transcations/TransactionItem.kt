@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.transactions_screen.last_transcations
+package com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations
 
 import android.view.SurfaceControl.Transaction
 import androidx.annotation.DrawableRes

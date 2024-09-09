@@ -1,4 +1,4 @@
-package com.belia.speedotransfer.ui.transactions_screen.transaction
+package com.belia.speedotransfer.ui.main_screens.transactions_screen.transaction
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
