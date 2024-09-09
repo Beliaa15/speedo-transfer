@@ -70,7 +70,7 @@ fun NotificationItem(
 
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.ic_notification),
+                    painter = painterResource(id = R.drawable.ic_notification2),
                     contentDescription = "Card Icon",
                     //colorFilter = ColorFilter.tint(RedP300),
                     modifier = modifier
