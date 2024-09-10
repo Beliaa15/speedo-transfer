@@ -37,7 +37,9 @@ fun SplashScreen(navController: NavController) {
             )
         )
         delay(2000L)
-        navController.navigate(AppRoutes.LOGIN)
+        navController.navigate(AppRoutes.LOGIN){
+            popUpTo(AppRoutes.SPLASH) { inclusive = true }
+        }
     }
 
     Box(
