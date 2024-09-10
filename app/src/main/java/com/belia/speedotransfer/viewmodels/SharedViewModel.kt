@@ -1,7 +1,6 @@
 package com.belia.speedotransfer.viewmodels
 
 import androidx.lifecycle.ViewModel
-import com.belia.speedotransfer.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 

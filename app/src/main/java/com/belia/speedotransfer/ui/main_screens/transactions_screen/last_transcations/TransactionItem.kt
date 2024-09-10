@@ -45,11 +45,10 @@ import com.belia.speedotransfer.ui.theme.bodyRegular14
 fun TransactionItem(
     name: String,
     cardDetails: String,
-    transactionTime: String,
     transactionDate: String,
     transactionType: String,
     transactionAmount: String,
-    transactionStatus: String,
+    transactionStatus: Boolean,
     modifier: Modifier = Modifier
 ) {
     Box (
@@ -82,7 +81,7 @@ fun TransactionItem(
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = if(transactionStatus == "Successful")
+                    painter = if(transactionStatus)
                                 painterResource(id = R.drawable.ic_card)
                             else
                                 painterResource(id = R.drawable.ic_bank),
@@ -113,7 +112,7 @@ fun TransactionItem(
                     modifier = modifier.padding(bottom = 2.dp)
                 )
                 Text(
-                    text = "$transactionDate $transactionTime - $transactionType",
+                    text = "$transactionDate - $transactionType",
                     color = GrayG100,
                     style = bodyRegular14
                 )
@@ -144,15 +143,16 @@ fun TransactionItem(
                     )
                 }
                 Text(
-                    text = transactionStatus,
-                    color = if (transactionStatus == "Successful")
+                    text = if(transactionStatus)
+                        "Successful" else
+                            "Failed",
+                    color = if (transactionStatus)
                                 Color(0xFF118A30)
                             else
                                 DangerD300,
                     fontFamily = InterFontFamily,
                     fontSize = 10.sp,
-                    //lineHeight = 14.dp,
-                    modifier = if (transactionStatus == "Successful") {
+                    modifier = if (transactionStatus) {
                         Modifier
                             .background(Color(0xFFEAF3EC), shape = RoundedCornerShape(4.dp))
                             .padding(horizontal = 8.dp, vertical = 5.dp)
@@ -173,10 +173,9 @@ private fun TransactionItemPrev() {
     TransactionItem(
         name = "Ahmed Mohamed",
         cardDetails = "Visa . Master Card . 1234",
-        transactionTime = "10:00",
         transactionDate = "Today",
         transactionType = "Received",
         transactionAmount = "1000",
-        transactionStatus = "Successful",
+        transactionStatus = true,
     )
 }

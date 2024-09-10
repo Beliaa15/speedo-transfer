@@ -7,7 +7,8 @@ data class User(
     val name: String = "",
     val email: String = "",
     val country: String = "",
-    @SerializedName("dateofBirth")
+    @SerializedName("dateOfBirth")
     val dob: String = "",
+    @SerializedName("mainAccount")
     val account: Account = Account()
 )

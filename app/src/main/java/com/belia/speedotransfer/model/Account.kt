@@ -1,7 +1,5 @@
 package com.belia.speedotransfer.model
 
-import java.time.LocalDateTime
-
 data class Account (
     val id: Int = 0,
     val accountNumber: String = "",

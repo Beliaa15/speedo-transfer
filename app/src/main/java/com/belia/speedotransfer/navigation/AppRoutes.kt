@@ -59,7 +59,7 @@ fun AppNavHost(modifier: Modifier = Modifier) {
         composable(route = SECONDSIGNUP) { SecondSignUp(navController) }
         composable(route = HOME) { HomePage(navController, sharedViewModel) }
         composable(route = TRANSFER) { AmountScreen(navController) }
-        composable(route = TRANSACTIONS) { LastTransactions(navController) }
+        composable(route = TRANSACTIONS) { LastTransactions(navController, sharedViewModel) }
         composable(route = MORE) { MoreScreen(navController) }
         composable(
             route = "$CONFIRMATION/{amount}/{name}/{account}",
