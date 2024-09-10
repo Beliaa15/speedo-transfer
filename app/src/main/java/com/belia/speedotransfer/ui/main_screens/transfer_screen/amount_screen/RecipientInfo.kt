@@ -10,10 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,14 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.RecipientTextField
-import com.belia.speedotransfer.ui.theme.DangerD300
-import com.belia.speedotransfer.ui.theme.GrayG10
-import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyMedium16
-import com.belia.speedotransfer.ui.theme.bodyRegular14
-import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
 fun RecipientInformation(
