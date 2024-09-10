@@ -41,11 +41,14 @@ import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.heading3
 import com.belia.speedotransfer.ui.theme.linkMedium
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.belia.speedotransfer.viewmodels.SignUpViewModel
 
 @Composable
 fun SecondSignUp(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: SignUpViewModel = viewModel()
 ) {
     var countryName by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
@@ -111,10 +114,12 @@ fun SecondSignUp(
 
             CountryPicker {
                 countryName = it
+                viewModel.country = countryName
             }
 
             DatePicker {
                 date = it
+                viewModel.dateOfBirth = date
             }
 
             Spacer(modifier = modifier.padding(12.dp))
@@ -122,8 +127,9 @@ fun SecondSignUp(
             RedButton(
                 text = "Continue",
                 onClick = {
-                    /*TODO(Post to signup API)*/
-                    navController.navigate(AppRoutes.HOME)
+                    viewModel.signUp()
+                    if(viewModel.isSignedUp)
+                        navController.navigate(AppRoutes.HOME)
                 },
                 isEnabled = date.isNotBlank() && countryName.isNotBlank()
             )
