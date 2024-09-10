@@ -26,6 +26,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.navigation.AppRoutes
@@ -40,16 +41,22 @@ import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.linkMedium
 import com.belia.speedotransfer.ui.theme.titleMedium
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.viewmodels.LoginViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
 fun Login(
     navController: NavController,
+    viewModel: LoginViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
+    val isLoading = viewModel.isLoading
+    val loginSuccess = viewModel.isLoggedIn
+    val loginError = viewModel.errorMessage
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -83,11 +90,15 @@ fun Login(
 
         EmailTextField {
             email = it
+            viewModel.email = email
         }
         PasswordTextField(
             text = "Password",
             isPasswordShown = false,
-            onChange = { password = it }
+            onChange = {
+                password = it
+                viewModel.password = password
+            }
         ) {
             validPassword = it
         }
@@ -97,7 +108,9 @@ fun Login(
         RedButton(
             text = "Sign in",
             onClick = {
-                navController.navigate(AppRoutes.HOME)
+                viewModel.loginUser()
+                if(viewModel.isLoggedIn)
+                    navController.navigate(AppRoutes.HOME)
             },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
         )
