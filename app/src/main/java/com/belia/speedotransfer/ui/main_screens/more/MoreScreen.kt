@@ -41,7 +41,6 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
-import com.belia.speedotransfer.navigation.AppRoutes.PROFILE
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG200
