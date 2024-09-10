@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 /*TODO
                    Add appNavigation host to start everything
                 */
-                AppNavHost()
+                AppNavHost(context = this)
             }
         }
     }

@@ -24,7 +24,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.buttonMedium
@@ -32,7 +34,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingScreen(modifier: Modifier = Modifier) {
+fun OnboardingScreen(navController: NavController, modifier: Modifier = Modifier, ) {
     val pagerState = rememberPagerState(
         pageCount = { 3 }
     )
@@ -57,7 +59,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
     ) {
         TextButton(
             onClick = {
-                // TODO: Login Screen
+                navController.navigate(AppRoutes.LOGIN)
             },
             modifier = modifier
                 .align(Alignment.End)
@@ -107,8 +109,7 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
                         pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
                 } else {
-                    // Navigate to the next screen or close onboarding
-                    // TODO: Login Screen
+                    navController.navigate(AppRoutes.LOGIN)
                 }
             },
             modifier = Modifier
@@ -131,5 +132,5 @@ fun OnboardingScreen(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun OnboardingScreenPrev() {
-    OnboardingScreen()
+//    OnboardingScreen()
 }
