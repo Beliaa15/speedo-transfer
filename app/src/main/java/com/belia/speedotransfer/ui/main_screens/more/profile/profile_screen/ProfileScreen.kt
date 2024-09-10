@@ -28,6 +28,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
@@ -44,14 +46,15 @@ import com.belia.speedotransfer.ui.theme.titleSemiBold
 @Composable
 fun ProfileScreen(
     name: String,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), title = "Profile", hasIcon = true)
+            TopBar(color = Color(0xFFFFF8E7), navController, title = "Profile", hasIcon = true)
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 4)
+            SpeedoNavigationBar(selectedIndex = 4, navController)
         }
     ) { innerPadding ->
         Column(
@@ -208,7 +211,7 @@ fun getInitials(name: String): String {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileScreenPrev() {
-    ProfileScreen(name = "Asmaa Dosuky")
+    ProfileScreen(name = "Asmaa Dosuky", rememberNavController())
 //    CardScreen(
 //        title = "Personal Information",
 //        subtitle = "Your information",

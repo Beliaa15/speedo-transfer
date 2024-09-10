@@ -38,6 +38,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
@@ -51,7 +53,10 @@ import com.belia.speedotransfer.ui.theme.smallRegular
 
 
 @Composable
-fun TimeOut(modifier: Modifier = Modifier) {
+fun TimeOut(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
@@ -163,6 +168,6 @@ fun InactivityCard(onDismiss: () -> Unit) {
 @Preview
 @Composable
 private fun TimeOutPrev() {
-    TimeOut()
+    TimeOut(rememberNavController())
 }
 

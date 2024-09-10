@@ -13,6 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.titleMedium
 
@@ -20,6 +22,7 @@ import com.belia.speedotransfer.ui.theme.titleMedium
 @Composable
 fun TopBar(
     color: Color,
+    navController: NavController,
     modifier: Modifier = Modifier,
     title: String = "",
     hasIcon: Boolean = false,
@@ -33,7 +36,9 @@ fun TopBar(
         },
         navigationIcon = {
             if (hasIcon) {
-                IconButton(onClick = { /*TODO*/ }) {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
                         contentDescription = "back button"
@@ -50,5 +55,5 @@ fun TopBar(
 @Preview
 @Composable
 private fun TopBarPrev() {
-    TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+    TopBar(color = Color(0xFFFFF8E7), rememberNavController(), hasIcon = true, title = "Transfer")
 }

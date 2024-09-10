@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.StepProgressIndicator
@@ -44,10 +45,10 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
 
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+            TopBar(color = Color(0xFFFFF8E7), navController = navController, hasIcon = true, title = "Transfer")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 1)
+            SpeedoNavigationBar(selectedIndex = 1, navController)
         }
     ) {
         innerPadding ->
@@ -81,7 +82,7 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
             )
             RedButton(
                 text = "Continue", onClick = {
-                    // navController.navigate("$CONFIRMATION/$amount/$recipientName/$recipientAccount")
+                    navController.navigate("$CONFIRMATION/$amount/$recipientName/$recipientAccount")
                     // TODO: Add navigation to confirmation screen
                 },
                 isEnabled = isButtonEnabled,

@@ -37,7 +37,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
+import com.belia.speedotransfer.navigation.AppRoutes.PROFILE
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG200
@@ -49,16 +53,19 @@ import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MoreScreen(modifier: Modifier = Modifier) {
+fun MoreScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     var state = rememberModalBottomSheetState()
 
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), title = "More", hasIcon = true)
+            TopBar(color = Color(0xFFFFF8E7), navController = navController, title = "More", hasIcon = true)
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 4)
+            SpeedoNavigationBar(selectedIndex = 4, navController)
         }
     ) { innerPadding ->
         Column(
@@ -73,7 +80,9 @@ fun MoreScreen(modifier: Modifier = Modifier) {
         ) {
             MoreItem(icon = R.drawable.website, title = "Transfer From Website", hasSahm = true)
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
-            MoreItem(icon = R.drawable.favorite, title = "Favorites", hasSahm = true)
+            MoreItem(icon = R.drawable.favorite, title = "Favorites", hasSahm = true) {
+                navController.navigate(FAVOURITES)
+            }
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
             MoreItem(icon = R.drawable.user, title = "Profile", hasSahm = true)
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
@@ -191,7 +200,7 @@ fun MoreItem(
             .fillMaxWidth()
             .height(56.dp)
             .padding(horizontal = 16.dp)
-            .clickable{ onClick() },
+            .clickable { onClick() },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -220,5 +229,5 @@ fun MoreItem(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun Prevvv() {
-    MoreScreen()
+    MoreScreen(navController = rememberNavController())
 }

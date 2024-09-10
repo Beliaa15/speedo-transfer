@@ -1,0 +1,74 @@
+package com.belia.speedotransfer.navigation
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
+import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
+import com.belia.speedotransfer.navigation.AppRoutes.HOME
+import com.belia.speedotransfer.navigation.AppRoutes.MORE
+import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
+import com.belia.speedotransfer.navigation.AppRoutes.TRANSACTIONS
+import com.belia.speedotransfer.navigation.AppRoutes.TRANSFER
+import com.belia.speedotransfer.ui.main_screens.home_screen.HomePage
+import com.belia.speedotransfer.ui.main_screens.more.MoreScreen
+import com.belia.speedotransfer.ui.main_screens.more.favourites.FavouriteScreen
+import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations.LastTransactions
+import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.AmountScreen
+import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
+import com.belia.speedotransfer.ui.main_screens.transfer_screen.payment_screen.PaymentScreen
+
+object AppRoutes {
+    const val HOME = "home"
+    const val TRANSFER = "transfer"
+    const val TRANSACTIONS = "transactions"
+    const val MORE = "more"
+    const val CONFIRMATION = "confirmation"
+    const val PAYMENT = "payment"
+    const val FAVOURITES = "favourites"
+}
+
+@Composable
+fun AppNavHost(modifier: Modifier = Modifier) {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = HOME
+    ) {
+        composable(route = HOME) { HomePage(navController) }
+        composable(route = TRANSFER) { AmountScreen(navController) }
+        composable(route = TRANSACTIONS) { LastTransactions(navController) }
+        composable(route = MORE) { MoreScreen(navController) }
+        composable(
+            route = "$CONFIRMATION/{amount}/{name}/{account}",
+            arguments = listOf(
+                navArgument("amount") { type = NavType.FloatType },
+                navArgument("name") { type = NavType.StringType },
+                navArgument("account") { type = NavType.StringType }
+            )
+        ) {
+            val amount = it.arguments?.getFloat("amount") ?: 0f
+            val name = it.arguments?.getString("name") ?: ""
+            val account = it.arguments?.getString("account") ?: ""
+            ConfirmationScreen(amount, name, account, navController = navController)
+        }
+        composable(
+            route = "$PAYMENT/{amount}/{name}/{account}",
+            arguments = listOf(
+                navArgument("amount") { type = NavType.FloatType },
+                navArgument("name") { type = NavType.StringType },
+                navArgument("account") { type = NavType.StringType }
+            )
+        ) {
+            val amount = it.arguments?.getFloat("amount") ?: 0f
+            val name = it.arguments?.getString("name") ?: ""
+            val account = it.arguments?.getString("account") ?: ""
+            PaymentScreen(amount, name, account, navController = navController)
+        }
+        composable(route = FAVOURITES) { FavouriteScreen(navController) }
+    }
+}

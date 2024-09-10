@@ -21,6 +21,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
@@ -42,14 +44,15 @@ fun Transaction(
     transactionTime: String,
     transactionStatus: String,
     reference: String,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "$transactionStatus Transactions")
+            TopBar(color = Color(0xFFFFF8E7), navController = navController, hasIcon = true, title = "$transactionStatus Transactions")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 2)
+            SpeedoNavigationBar(selectedIndex = 2, navController)
         }
     ) {
         innerPadding ->
@@ -118,6 +121,7 @@ private fun TransactionPrev() {
         transactionDate = "20 Jul 2024",
         transactionTime = "10:00 PM",
         reference = "123456789876",
-        transactionStatus = "Successful"
+        transactionStatus = "Successful",
+        navController = rememberNavController()
     )
 }

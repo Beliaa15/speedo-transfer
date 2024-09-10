@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
@@ -41,10 +42,10 @@ fun ConfirmationScreen(
 ) {
     Scaffold (
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+            TopBar(color = Color(0xFFFFF8E7), navController, hasIcon = true, title = "Transfer")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 1)
+            SpeedoNavigationBar(selectedIndex = 1, navController)
         }
     ) {
             innerPadding ->
@@ -87,7 +88,7 @@ fun ConfirmationScreen(
             RedButton(
                 text = "Confirm",
                 onClick = {
-                    // navController.navigate("$PAYMENT/$amount/$name/$account")
+                    navController.navigate("$PAYMENT/$amount/$name/$account")
                     // TODO: Add navigation to payment screen
                 },
                 modifier = modifier.padding(horizontal = 16.dp)
@@ -96,7 +97,7 @@ fun ConfirmationScreen(
             EmptyButton(
                 text = "Previous",
                 onClick = {
-                    // navController.navigate(AMOUNT)
+                    navController.popBackStack()
                     // TODO: Add navigation to amount screen
                 },
                 modifier = modifier.padding(horizontal = 16.dp)

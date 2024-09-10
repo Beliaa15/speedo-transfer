@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 
@@ -24,14 +26,15 @@ fun NotificationScreen(
     account: String,
     date: String,
     time: String,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold (
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Notifications")
+            TopBar(color = Color(0xFFFFF8E7), navController = navController, hasIcon = true, title = "Notifications")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 4)
+            SpeedoNavigationBar(selectedIndex = 4, navController)
         }
     ) {
         innerPadding ->
@@ -41,10 +44,10 @@ fun NotificationScreen(
                 .fillMaxSize()
                 .padding(top = innerPadding.calculateTopPadding())
                 .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
+                    brush = Brush.linearGradient(
+                        colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
+                    )
                 )
-            )
         ) {
             LazyColumn {
                 items(3) {
@@ -71,6 +74,7 @@ private fun NotificationScreenPrev() {
         name = "Asmaa Dosuky",
         account = "1234 xxx",
         date = "12 Jul 2024",
-        time = "09:00 AM"
+        time = "09:00 AM",
+        navController = rememberNavController()
     )
 }

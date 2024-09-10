@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
@@ -26,7 +28,10 @@ import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 
 @Composable
-fun ChangePasswordScreen(modifier: Modifier = Modifier) {
+fun ChangePasswordScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var curPassword by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
     var isPasswordShown by remember { mutableStateOf(false) }
@@ -45,6 +50,7 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
                 TopBar(
                     color = Color(0xFFFFF8E7),
                     title = "Change Password",
+                    navController = navController,
                     hasIcon = true
                 )
             },
@@ -89,5 +95,5 @@ fun ChangePasswordScreen(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ASDASDsdas() {
-    ChangePasswordScreen()
+    ChangePasswordScreen(navController = rememberNavController())
 }

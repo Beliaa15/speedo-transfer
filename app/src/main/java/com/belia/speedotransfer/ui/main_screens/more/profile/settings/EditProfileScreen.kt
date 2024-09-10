@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
@@ -25,7 +26,10 @@ import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 
 @Composable
-fun EditProfileScreen(modifier: Modifier = Modifier) {
+fun EditProfileScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var countryName by remember { mutableStateOf("") }
@@ -41,7 +45,7 @@ fun EditProfileScreen(modifier: Modifier = Modifier) {
             )
     ) {
         Scaffold(
-            topBar = { TopBar(color = Color(0xFFFFF8E7), title = "Edit Profile", hasIcon = true) },
+            topBar = { TopBar(color = Color(0xFFFFF8E7), navController = navController, title = "Edit Profile", hasIcon = true) },
             modifier = modifier.padding(horizontal = 16.dp)
         ) { innerPadding ->
             Column(

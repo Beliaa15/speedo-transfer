@@ -17,6 +17,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG100
@@ -32,14 +34,15 @@ fun ProfileInfo(
     dob: String,
     country: String,
     account: String,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), title = "Profile Information", hasIcon = true)
+            TopBar(color = Color(0xFFFFF8E7), navController, title = "Profile Information", hasIcon = true)
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 4)
+            SpeedoNavigationBar(selectedIndex = 4, navController = rememberNavController())
         }
     ) { innerPadding ->
         Column(
@@ -125,7 +128,8 @@ private fun ProfileInfoPrev() {
         email = "mohanedemad11@gmail.com",
         dob = "10/03/2002",
         country = "Egypt",
-        account = "1234xxxx"
+        account = "1234xxxx",
+        rememberNavController()
     )
 //    InfoCard(
 //        title = "Full Name",

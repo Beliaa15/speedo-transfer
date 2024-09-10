@@ -30,7 +30,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG200
 import com.belia.speedotransfer.ui.theme.InterFontFamily
@@ -39,30 +42,40 @@ import com.belia.speedotransfer.ui.theme.smallRegular
 
 data class BottomNavigationItem(
     val title: String,
+    val route: String,
     val icon: ImageVector,
 )
 
 @Composable
-fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
+fun SpeedoNavigationBar(
+    selectedIndex: Int,
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     val navigationItems = listOf(
         BottomNavigationItem(
             title = "Home",
+            route = AppRoutes.HOME,
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_home)
         ),
         BottomNavigationItem(
             title = "Transfer",
+            route = AppRoutes.TRANSFER,
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_transfer)
         ),
         BottomNavigationItem(
             title = "Transactions",
+            route = AppRoutes.TRANSACTIONS,
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_transcations)
         ),
         BottomNavigationItem(
             title = "My cards",
+            route = "",
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_mycards)
         ),
         BottomNavigationItem(
             title = "More",
+            route = AppRoutes.MORE,
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_more)
         )
     )
@@ -84,7 +97,10 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
             navigationItems.forEachIndexed { index, item ->
                 NavigationBarItem(
                     selected = index == selectedItem,
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        if(item.route.isNotEmpty())
+                            navController.navigate(item.route)
+                    },
                     icon = {
                         Icon(
                             imageVector = item.icon,
@@ -105,7 +121,6 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
                     colors = NavigationBarItemDefaults.colors(
                         indicatorColor = Color.Transparent,
                     ),
-                    //modifier = modifier.width(150.dp)
                 )
             }
         }
@@ -114,5 +129,5 @@ fun SpeedoNavigationBar(modifier: Modifier = Modifier, selectedIndex: Int) {
 @Preview(showSystemUi = false, showBackground = true)
 @Composable
 private fun SpeedoNavigationBarPrev() {
-    SpeedoNavigationBar(selectedIndex = 0)
+    SpeedoNavigationBar(selectedIndex = 0, rememberNavController())
 }

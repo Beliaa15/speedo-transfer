@@ -29,6 +29,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -47,13 +49,16 @@ import com.belia.speedotransfer.ui.theme.heading3
 import com.belia.speedotransfer.ui.theme.linkMedium
 
 @Composable
-fun SecondSignUp(modifier: Modifier = Modifier) {
+fun SecondSignUp(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var countryName by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
 
     Scaffold(
         topBar = {
-            TopBar(color = Color.White, hasIcon = true, title = "", modifier = modifier)
+            TopBar(color = Color.White, navController, hasIcon = true, title = "", modifier = modifier)
         }
     ) { _ ->
 
@@ -144,5 +149,5 @@ fun SecondSignUp(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun prevvvv() {
-    SecondSignUp()
+    SecondSignUp(rememberNavController())
 }

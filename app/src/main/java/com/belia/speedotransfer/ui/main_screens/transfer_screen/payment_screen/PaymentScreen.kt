@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes.TRANSFER
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
@@ -41,10 +42,10 @@ fun PaymentScreen(
 ) {
     Scaffold (
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transfer")
+            TopBar(color = Color(0xFFFFF8E7), navController = navController ,hasIcon = true, title = "Transfer")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 1)
+            SpeedoNavigationBar(selectedIndex = 1, navController)
         }
     ) {
             innerPadding ->
@@ -84,7 +85,7 @@ fun PaymentScreen(
             RedButton(
                 text = "Back to Home",
                 onClick = {
-                    // navController.popBackStack(route = AMOUNT, inclusive = false)
+                    navController.popBackStack(route = TRANSFER, inclusive = false)
                     // TODO: Pop back stack to home screen
                 },
                 modifier = modifier.padding(horizontal = 16.dp)

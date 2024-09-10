@@ -46,6 +46,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
@@ -63,13 +65,16 @@ import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 @Composable
-fun FavouriteScreen(modifier: Modifier = Modifier) {
+fun FavouriteScreen(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     Scaffold(
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), title = "Favourites", hasIcon = true)
+            TopBar(color = Color(0xFFFFF8E7), navController, title = "Favourites", hasIcon = true)
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 4)
+            SpeedoNavigationBar(selectedIndex = 4, navController)
         },
     ) { innerPadding ->
         Column(

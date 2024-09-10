@@ -15,6 +15,8 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
@@ -22,13 +24,16 @@ import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 @Composable
-fun LastTransactions(modifier: Modifier = Modifier) {
+fun LastTransactions(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     Scaffold (
         topBar = {
-            TopBar(color = Color(0xFFFFF8E7), hasIcon = true, title = "Transactions")
+            TopBar(color = Color(0xFFFFF8E7), navController, hasIcon = true, title = "Transactions")
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 2)
+            SpeedoNavigationBar(selectedIndex = 2, navController)
         }
     ) {
         innerPadding ->
@@ -72,5 +77,5 @@ fun LastTransactions(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true)
 @Composable
 private fun LastTransactionsPrev() {
-    LastTransactions()
+    LastTransactions(navController = rememberNavController())
 }

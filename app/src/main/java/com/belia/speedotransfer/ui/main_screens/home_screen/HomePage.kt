@@ -10,13 +10,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 
 @Composable
-fun HomePage(modifier: Modifier = Modifier) {
+fun HomePage(navController: NavController, modifier: Modifier = Modifier) {
     Scaffold (
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 0)
+            SpeedoNavigationBar(selectedIndex = 0, navController)
         }
     ) {
         innerPadding->
@@ -43,5 +45,5 @@ fun HomePage(modifier: Modifier = Modifier) {
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun HomePagePrev() {
-    HomePage()
+    HomePage(rememberNavController())
 }

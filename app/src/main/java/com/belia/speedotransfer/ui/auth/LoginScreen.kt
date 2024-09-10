@@ -33,6 +33,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -51,7 +53,10 @@ import com.belia.speedotransfer.ui.theme.titleSemiBold
 
 
 @Composable
-fun Login(modifier: Modifier = Modifier) {
+fun Login(
+    navController: NavController,
+    modifier: Modifier = Modifier
+) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
@@ -132,5 +137,5 @@ fun Login(modifier: Modifier = Modifier) {
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun LoginPreview() {
-    Login()
+    Login(rememberNavController())
 }
