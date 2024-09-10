@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.main_screens.home_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,6 +30,8 @@ fun HomePage(
     val userId by sharedViewModel.userId.collectAsState()
     viewModel.getUser(userId)
     val user by viewModel.user.collectAsState()
+    val transactions = user.account.transactions
+    Log.d("trace", "HomePage: ${user.name}\n${user.account}")
     //val transactions = user!!.accounts[0].transactions
 
     Scaffold (
@@ -50,7 +53,7 @@ fun HomePage(
         {
             TopSection(name = user.name)
             BalanceCard(user.account.balance.toFloat())
-            RecentTransactions()
+            RecentTransactions(navController = navController, transactions = transactions, userName = user.name)
         }
 
     }

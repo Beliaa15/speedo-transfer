@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -57,7 +58,7 @@ fun Login(
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
     val isLoading = viewModel.isLoading
-    val loginSuccess = viewModel.isLoggedIn
+    //val loginSuccess = viewModel.isLoggedIn
     val loginError = viewModel.errorMessage
 
     Column(
@@ -111,9 +112,6 @@ fun Login(
             text = "Sign in",
             onClick = {
                 viewModel.loginUser()
-                val id = viewModel.userId
-                sharedViewModel.setUserId(id)
-                navController.navigate(AppRoutes.HOME)
             },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
         )
@@ -141,6 +139,14 @@ fun Login(
                     }
             )
         }
+    }
+    LaunchedEffect(key1 = viewModel.isLoggedIn) {
+        if(viewModel.isLoggedIn) {
+            val id = viewModel.userId
+            sharedViewModel.setUserId(id)
+            navController.navigate(AppRoutes.HOME)
+        }
+        viewModel.isLoggedIn = false
     }
 }
 
