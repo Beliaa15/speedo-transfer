@@ -29,6 +29,7 @@ import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.Am
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.payment_screen.PaymentScreen
 import com.belia.speedotransfer.ui.splash_screen.SplashScreen
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 object AppRoutes {
     const val SPLASH = "splash"
@@ -47,15 +48,16 @@ object AppRoutes {
 @Composable
 fun AppNavHost(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
+    val sharedViewModel = SharedViewModel()
     NavHost(
         navController = navController,
         startDestination = SPLASH
     ) {
         composable(route = SPLASH) { SplashScreen(navController) }
-        composable(route = LOGIN) { Login(navController) }
+        composable(route = LOGIN) { Login(navController, sharedViewModel) }
         composable(route = SIGNUP) { SignUp(navController) }
         composable(route = SECONDSIGNUP) { SecondSignUp(navController) }
-        composable(route = HOME) { HomePage(navController) }
+        composable(route = HOME) { HomePage(navController, sharedViewModel) }
         composable(route = TRANSFER) { AmountScreen(navController) }
         composable(route = TRANSACTIONS) { LastTransactions(navController) }
         composable(route = MORE) { MoreScreen(navController) }

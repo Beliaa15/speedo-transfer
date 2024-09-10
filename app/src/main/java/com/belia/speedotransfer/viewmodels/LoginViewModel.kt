@@ -2,6 +2,7 @@ package com.belia.speedotransfer.viewmodels
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
@@ -19,6 +20,7 @@ class LoginViewModel : ViewModel() {
     var errorMessage by mutableStateOf("")
     var isLoading by mutableStateOf(false)
     var isLoggedIn by mutableStateOf(false)
+    var userId by mutableIntStateOf(0)
 
     fun loginUser() {
         isLoading = true
@@ -32,7 +34,8 @@ class LoginViewModel : ViewModel() {
 
                 // Handle success response (e.g., store token)
                 isLoggedIn = true
-                Log.d("trace", "loginUser: ${response.token}")
+                userId = response.userId
+                Log.d("trace", "loginUser: ${response.token}, ${response.userId}")
             } catch (e: Exception) {
                 // Handle error (e.g., show error message)
                 errorMessage = e.message ?: "Login failed"

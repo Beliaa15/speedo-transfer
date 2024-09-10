@@ -38,7 +38,7 @@ data class BottomNavigationItem(
 fun SpeedoNavigationBar(
     selectedIndex: Int,
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     val navigationItems = listOf(
         BottomNavigationItem(

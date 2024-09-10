@@ -43,13 +43,15 @@ import com.belia.speedotransfer.ui.theme.titleMedium
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 import com.belia.speedotransfer.viewmodels.LoginViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 
 @Composable
 fun Login(
     navController: NavController,
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
     viewModel: LoginViewModel = viewModel(),
-    modifier: Modifier = Modifier
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -109,8 +111,9 @@ fun Login(
             text = "Sign in",
             onClick = {
                 viewModel.loginUser()
-                if(viewModel.isLoggedIn)
-                    navController.navigate(AppRoutes.HOME)
+                val id = viewModel.userId
+                sharedViewModel.setUserId(id)
+                navController.navigate(AppRoutes.HOME)
             },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
         )
@@ -144,5 +147,5 @@ fun Login(
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 private fun LoginPreview() {
-    Login(rememberNavController())
+    Login(rememberNavController(), sharedViewModel = SharedViewModel())
 }
