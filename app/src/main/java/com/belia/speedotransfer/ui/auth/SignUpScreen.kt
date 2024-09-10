@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.NameTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
@@ -92,7 +93,7 @@ fun SignUp(
         NameTextField {
             name = it
         }
-        EmailTextField() {
+        EmailTextField {
             email = it
         }
         PasswordTextField(
@@ -113,7 +114,10 @@ fun SignUp(
 
         RedButton(
             text = "Sign up",
-            onClick = { /*TODO*/ },
+            onClick = {
+                /*TODO(Send to API)*/
+                navController.navigate(AppRoutes.SECONDSIGNUP)
+            },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword && passwordsMatch
         )
 
@@ -135,7 +139,9 @@ fun SignUp(
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier
                     .padding(start = 2.dp)
-                    .clickable { /*TODO go to Sign up*/ }
+                    .clickable {
+                        navController.popBackStack()
+                    }
             )
         }
     }

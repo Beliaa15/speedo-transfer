@@ -10,10 +10,17 @@ import androidx.navigation.navArgument
 import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
 import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
 import com.belia.speedotransfer.navigation.AppRoutes.HOME
+import com.belia.speedotransfer.navigation.AppRoutes.LOGIN
 import com.belia.speedotransfer.navigation.AppRoutes.MORE
 import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
+import com.belia.speedotransfer.navigation.AppRoutes.SECONDSIGNUP
+import com.belia.speedotransfer.navigation.AppRoutes.SIGNUP
+import com.belia.speedotransfer.navigation.AppRoutes.SPLASH
 import com.belia.speedotransfer.navigation.AppRoutes.TRANSACTIONS
 import com.belia.speedotransfer.navigation.AppRoutes.TRANSFER
+import com.belia.speedotransfer.ui.auth.Login
+import com.belia.speedotransfer.ui.auth.SecondSignUp
+import com.belia.speedotransfer.ui.auth.SignUp
 import com.belia.speedotransfer.ui.main_screens.home_screen.HomePage
 import com.belia.speedotransfer.ui.main_screens.more.MoreScreen
 import com.belia.speedotransfer.ui.main_screens.more.favourites.FavouriteScreen
@@ -21,8 +28,13 @@ import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transca
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.AmountScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.payment_screen.PaymentScreen
+import com.belia.speedotransfer.ui.splash_screen.SplashScreen
 
 object AppRoutes {
+    const val SPLASH = "splash"
+    const val LOGIN = "login"
+    const val SIGNUP = "signup"
+    const val SECONDSIGNUP = "secondsignup"
     const val HOME = "home"
     const val TRANSFER = "transfer"
     const val TRANSACTIONS = "transactions"
@@ -37,8 +49,12 @@ fun AppNavHost(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = HOME
+        startDestination = SPLASH
     ) {
+        composable(route = SPLASH) { SplashScreen(navController) }
+        composable(route = LOGIN) { Login(navController) }
+        composable(route = SIGNUP) { SignUp(navController) }
+        composable(route = SECONDSIGNUP) { SecondSignUp(navController) }
         composable(route = HOME) { HomePage(navController) }
         composable(route = TRANSFER) { AmountScreen(navController) }
         composable(route = TRANSACTIONS) { LastTransactions(navController) }

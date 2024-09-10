@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -80,7 +81,7 @@ fun Login(
 
         Spacer(modifier = modifier.height(56.dp))
 
-        EmailTextField() {
+        EmailTextField {
             email = it
         }
         PasswordTextField(
@@ -95,7 +96,9 @@ fun Login(
 
         RedButton(
             text = "Sign in",
-            onClick = { /*TODO*/ },
+            onClick = {
+                navController.navigate(AppRoutes.HOME)
+            },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
         )
 
@@ -117,7 +120,9 @@ fun Login(
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier
                     .padding(start = 2.dp)
-                    .clickable { /*TODO go to Sign up*/ }
+                    .clickable {
+                        navController.navigate(AppRoutes.SIGNUP)
+                    }
             )
         }
     }

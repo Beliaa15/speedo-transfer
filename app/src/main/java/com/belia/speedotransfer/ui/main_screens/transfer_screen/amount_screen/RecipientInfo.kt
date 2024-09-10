@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.ui.common_ui.RecipientTextField
 import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG70
@@ -44,9 +45,9 @@ fun RecipientInformation(
     onAccountChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isFocused by remember { mutableStateOf(false) }
+    var isBottomSheetVisible by remember { mutableStateOf(false) }
 
-    Column (
+    Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
@@ -62,11 +63,13 @@ fun RecipientInformation(
                 style = bodyMedium16
             )
 
-            Row (
+            Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier
-                    .clickable { /*TODO: Add functionality*/ }
-            ){
+                    .clickable {
+                        isBottomSheetVisible = true
+                    }
+            ) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_fav),
                     contentDescription = "Favourites Icon",
@@ -92,68 +95,13 @@ fun RecipientInformation(
             }
         }
         Spacer(modifier = modifier.height(20.dp))
-        Text(
-            text = "Recipient Name",
-            color = GrayG700,
-            style = bodyRegular16
-        )
-        Spacer(modifier = modifier.height(8.dp))
-        OutlinedTextField(
-            value = name,
-            onValueChange = onNameChange ,
-            placeholder = { Text(
-                text = "Enter Recipient Name",
-                style = bodyRegular14
-            ) },
-            maxLines = 1,
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = GrayG70,
-                unfocusedLabelColor = GrayG70,
-                unfocusedContainerColor = GrayG10,
-                unfocusedPlaceholderColor = GrayG70,
-                focusedBorderColor = GrayG700,
-                focusedContainerColor = GrayG10,
-                focusedTrailingIconColor = GrayG700,
-                focusedLabelColor = GrayG700,
-                errorContainerColor = DangerD300,
-                errorTrailingIconColor = DangerD300,
-                cursorColor = GrayG700
-            ),
-            shape = RoundedCornerShape(6.dp),
-            modifier = modifier
-                .fillMaxWidth()
-        )
-        Spacer(modifier = modifier.height(8.dp))
-        Text(
-            text = "Recipient Account",
-            color = GrayG700,
-            style = bodyRegular16
-        )
-        Spacer(modifier = modifier.height(8.dp))
-        OutlinedTextField(
-            value = account,
-            onValueChange = onAccountChange,
-            placeholder = { Text(
-                text = "Enter Recipient Account Number",
-                style = bodyRegular14
-            ) },
-            maxLines = 1,
-            colors = OutlinedTextFieldDefaults.colors(
-                unfocusedBorderColor = GrayG70,
-                unfocusedLabelColor = GrayG70,
-                unfocusedContainerColor = GrayG10,
-                unfocusedPlaceholderColor = GrayG70,
-                focusedBorderColor = GrayG700,
-                focusedContainerColor = GrayG10,
-                focusedTrailingIconColor = GrayG700,
-                focusedLabelColor = GrayG700,
-                errorContainerColor = DangerD300,
-                errorTrailingIconColor = DangerD300,
-                cursorColor = GrayG700
-            ),
-            shape = RoundedCornerShape(6.dp),
-            modifier = modifier
-                .fillMaxWidth()
+        RecipientTextField(title = "Recipient Name", placeholder = "Enter Recipient Name", onChange = onNameChange)
+
+        RecipientTextField(title = "Recipient Account", placeholder = "Enter Recipient Account Number", onChange = onAccountChange)
+
+        FavouriteBottomSheet(
+            isVisible = isBottomSheetVisible,
+            onDismiss = {isBottomSheetVisible = false}
         )
     }
 }

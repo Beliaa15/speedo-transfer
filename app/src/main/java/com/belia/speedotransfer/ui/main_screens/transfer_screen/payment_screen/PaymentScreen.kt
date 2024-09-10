@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
-import com.belia.speedotransfer.navigation.AppRoutes.TRANSFER
+import com.belia.speedotransfer.navigation.AppRoutes.HOME
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
@@ -85,7 +85,7 @@ fun PaymentScreen(
             RedButton(
                 text = "Back to Home",
                 onClick = {
-                    navController.popBackStack(route = TRANSFER, inclusive = false)
+                    navController.popBackStack(route = HOME, inclusive = false)
                     // TODO: Pop back stack to home screen
                 },
                 modifier = modifier.padding(horizontal = 16.dp)

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -51,7 +52,13 @@ fun SecondSignUp(
 
     Scaffold(
         topBar = {
-            TopBar(color = Color.White, navController, hasIcon = true, title = "", modifier = modifier)
+            TopBar(
+                color = Color.White,
+                navController,
+                hasIcon = true,
+                title = "",
+                modifier = modifier
+            )
         }
     ) { _ ->
 
@@ -112,7 +119,14 @@ fun SecondSignUp(
 
             Spacer(modifier = modifier.padding(12.dp))
 
-            RedButton(text = "Continue", onClick = { /*TODO*/ }, isEnabled = date.isNotBlank() && countryName.isNotBlank() )
+            RedButton(
+                text = "Continue",
+                onClick = {
+                    /*TODO(Post to signup API)*/
+                    navController.navigate(AppRoutes.HOME)
+                },
+                isEnabled = date.isNotBlank() && countryName.isNotBlank()
+            )
 
             Row(
                 horizontalArrangement = Arrangement.Center,
@@ -132,7 +146,10 @@ fun SecondSignUp(
                     textDecoration = TextDecoration.Underline,
                     modifier = Modifier
                         .padding(start = 2.dp)
-                        .clickable { /*TODO go to Sign up*/ }
+                        .clickable {
+                            /*TODO go to Sign up*/
+                            navController.popBackStack(AppRoutes.LOGIN, inclusive = false)
+                        }
                 )
             }
         }
