@@ -1,6 +1,5 @@
 package com.belia.speedotransfer.ui.main_screens.notifitcation_screen
 
-import android.app.Notification
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -17,18 +16,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
-import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG100
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.GrayG900
-import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.RedP50
 import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular12

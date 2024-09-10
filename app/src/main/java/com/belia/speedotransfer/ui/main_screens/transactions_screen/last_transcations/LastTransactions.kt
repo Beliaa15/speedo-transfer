@@ -17,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG900

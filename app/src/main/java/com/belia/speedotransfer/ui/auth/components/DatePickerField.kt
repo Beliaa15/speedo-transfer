@@ -1,7 +1,6 @@
 package com.belia.speedotransfer.ui.auth.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -28,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.R
-import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10
 import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700

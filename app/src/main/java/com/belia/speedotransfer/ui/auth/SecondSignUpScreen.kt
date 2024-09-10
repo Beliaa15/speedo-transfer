@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,15 +32,12 @@ import com.belia.speedotransfer.ui.auth.components.DatePicker
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.BottomRose
-import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG100
-import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
-import com.belia.speedotransfer.ui.theme.buttonMedium
 import com.belia.speedotransfer.ui.theme.heading3
 import com.belia.speedotransfer.ui.theme.linkMedium
 

@@ -3,7 +3,6 @@ package com.belia.speedotransfer.ui.auth
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,12 +31,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
@@ -45,11 +41,9 @@ import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.BottomRose
-import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular12
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.heading3
-import com.belia.speedotransfer.ui.theme.smallRegular
 
 
 @Composable

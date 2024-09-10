@@ -26,7 +26,6 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG10

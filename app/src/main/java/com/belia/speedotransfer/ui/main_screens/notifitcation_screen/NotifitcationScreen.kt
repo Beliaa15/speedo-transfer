@@ -1,6 +1,5 @@
 package com.belia.speedotransfer.ui.main_screens.notifitcation_screen
 
-import android.app.Notification
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
