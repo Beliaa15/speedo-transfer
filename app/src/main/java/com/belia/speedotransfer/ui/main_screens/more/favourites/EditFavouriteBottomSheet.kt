@@ -51,6 +51,7 @@ fun EditFavouriteBottomSheet(
             Column(
                 modifier = modifier
                     .fillMaxWidth()
+                    .padding(16.dp)
             ) {
                 Row(
                     horizontalArrangement = Arrangement.Center,
@@ -72,11 +73,17 @@ fun EditFavouriteBottomSheet(
                     )
                 }
 
-                RecipientTextField(title = "Recipient Account", placeholder = "Enter Cardholder Account") {
+                RecipientTextField(
+                    title = "Recipient Account",
+                    placeholder = "Enter Cardholder Account"
+                ) {
                     account = it
                 }
 
-                RecipientTextField(title = "Recipient Name", placeholder = "Enter Cardholder Name") {
+                RecipientTextField(
+                    title = "Recipient Name",
+                    placeholder = "Enter Cardholder Name"
+                ) {
                     name = it
                 }
                 Spacer(modifier = modifier.height(20.dp))
@@ -88,7 +95,7 @@ fun EditFavouriteBottomSheet(
                         Toast.makeText(context, "Edited Successfully", Toast.LENGTH_SHORT).show()
                     },
                     isEnabled = name.isNotBlank() && account.isNotBlank(),
-                    modifier = modifier.padding(horizontal = 16.dp)
+                    //modifier = modifier.padding(horizontal = 16.dp)
                 )
                 Spacer(modifier = modifier.height(50.dp))
             }
