@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -27,7 +28,7 @@ fun RecipientTextField(
     modifier: Modifier = Modifier,
     onChange: (String) -> Unit
 ) {
-    var value by remember { mutableStateOf("") }
+    var value by rememberSaveable { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
     Text(

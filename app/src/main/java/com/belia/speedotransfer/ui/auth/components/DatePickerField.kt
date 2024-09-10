@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -39,7 +40,7 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DatePicker(modifier: Modifier = Modifier, onClick: (String) -> Unit) {
-    var date by remember { mutableStateOf("") }
+    var date by rememberSaveable { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
     Text(

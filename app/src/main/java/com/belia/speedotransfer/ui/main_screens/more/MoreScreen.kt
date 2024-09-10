@@ -88,7 +88,11 @@ fun MoreScreen(
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
             MoreItem(icon = R.drawable.logout, title = "Logout"){
                 /*TODO (End API session)*/
-                navController.popBackStack(AppRoutes.LOGIN, inclusive = false)
+                navController.navigate(AppRoutes.LOGIN){
+                    popUpTo(AppRoutes.LOGIN) {
+                        inclusive = true
+                    }
+                }
             }
         }
     }

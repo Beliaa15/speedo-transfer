@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -245,8 +246,8 @@ object Countries {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CountryPicker(modifier: Modifier = Modifier, onClick: (String) -> Unit) {
-    var countryName by remember { mutableStateOf("") }
-    var selectedCountry by remember { mutableStateOf<Int?>(null) }
+    var countryName by rememberSaveable { mutableStateOf("") }
+    var selectedCountry by rememberSaveable { mutableStateOf<Int?>(null) }
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     var state = rememberModalBottomSheetState()
 

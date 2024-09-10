@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -53,10 +54,10 @@ fun SignUp(
     modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = viewModel()
 ) {
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var confirmPassword by remember { mutableStateOf("") }
+    var name by rememberSaveable  { mutableStateOf(viewModel.name) }
+    var email by rememberSaveable  { mutableStateOf(viewModel.email) }
+    var password by rememberSaveable  { mutableStateOf(viewModel.password) }
+    var confirmPassword by rememberSaveable  { mutableStateOf(viewModel.confirmPassword) }
     var isPasswordShown by remember { mutableStateOf(false) }
     var validPassword by remember { mutableStateOf(false) }
     val passwordsMatch = password == confirmPassword
@@ -95,18 +96,18 @@ fun SignUp(
         Spacer(modifier = modifier.height(55.dp))
         NameTextField {
             name = it
-            viewModel.name = name
+            viewModel.name = it
         }
         EmailTextField {
             email = it
-            viewModel.email = email
+            viewModel.email = it
         }
         PasswordTextField(
             text = "Password",
             isPasswordShown = isPasswordShown,
             onChange = {
                 password = it
-                viewModel.password = password
+                viewModel.password = it
             }
         ) {
             validPassword = it
@@ -116,7 +117,7 @@ fun SignUp(
             isPasswordShown = isPasswordShown,
             onChange = {
                 confirmPassword = it
-                viewModel.confirmPassword = confirmPassword
+                viewModel.confirmPassword = it
             }
         ) {
             validPassword = it
@@ -126,7 +127,6 @@ fun SignUp(
         RedButton(
             text = "Sign up",
             onClick = {
-                /*TODO(Send to API)*/
                 navController.navigate(AppRoutes.SECONDSIGNUP)
             },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword && passwordsMatch

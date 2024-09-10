@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -43,7 +44,7 @@ fun PasswordTextField(
     isPasswordValid: (Boolean) -> Unit
 ) {
     val context = LocalContext.current
-    var tempPassword by remember { mutableStateOf("") }
+    var tempPassword by rememberSaveable { mutableStateOf("") }
     var tempIsPasswordShown by remember { mutableStateOf(isPasswordShown) }
     var passwordConstraintsText by remember { mutableStateOf("") }
     isPasswordValid(passwordConstraintsText == "")

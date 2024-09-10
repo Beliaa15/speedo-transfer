@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -50,8 +51,8 @@ fun SecondSignUp(
     modifier: Modifier = Modifier,
     viewModel: SignUpViewModel = viewModel()
 ) {
-    var countryName by remember { mutableStateOf("") }
-    var date by remember { mutableStateOf("") }
+    var countryName by rememberSaveable { mutableStateOf(viewModel.country) }
+    var date by rememberSaveable { mutableStateOf(viewModel.dateOfBirth) }
 
     Scaffold(
         topBar = {
@@ -114,12 +115,12 @@ fun SecondSignUp(
 
             CountryPicker {
                 countryName = it
-                viewModel.country = countryName
+                viewModel.country = it
             }
 
             DatePicker {
                 date = it
-                viewModel.dateOfBirth = date
+                viewModel.dateOfBirth = it
             }
 
             Spacer(modifier = modifier.padding(12.dp))
