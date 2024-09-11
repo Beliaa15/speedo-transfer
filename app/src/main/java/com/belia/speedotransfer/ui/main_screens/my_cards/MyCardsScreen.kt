@@ -68,7 +68,7 @@ fun MyCardsScreen(
             )
         },
         bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 0, navController)
+            SpeedoNavigationBar(selectedIndex = 3, navController)
         }
     ) { innerPadding ->
         Column(

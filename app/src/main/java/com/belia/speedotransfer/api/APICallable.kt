@@ -20,6 +20,7 @@ import com.belia.speedotransfer.model.TransferRequest
 import com.belia.speedotransfer.model.User
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -35,23 +36,39 @@ interface APICallable {
     suspend fun logout()
 
     @GET(USER_ENDPOINT)
-    suspend fun getUser(@Path("customerId") customerId: Int): User
+    suspend fun getUser(@Header("token") token: String, @Path("customerId") customerId: Int): User
 
     @POST(CHANGE_PASSWORD_ENDPOINT)
-    suspend fun changePassword(@Path("customerId") customerId: Int, @Body changePasswordRequest: ChangePasswordRequest) : User
+    suspend fun changePassword(
+        @Path("customerId") customerId: Int,
+        @Body changePasswordRequest: ChangePasswordRequest
+    ): User
 
     @POST(EDIT_PROFILE_ENDPOINT)
-    suspend fun editProfile(@Path("customerId") customerId: Int, @Body editProfileRequest: EditProfileRequest) : User
+    suspend fun editProfile(
+        @Path("customerId") customerId: Int,
+        @Body editProfileRequest: EditProfileRequest
+    ): User
 
     @POST(CREATE_FAVOURITE_ENDPOINT)
-    suspend fun createFavourite(@Path("accountNumber") accountNumber: String, @Body fav: Favourite) : Favourite
+    suspend fun createFavourite(
+        @Path("accountNumber") accountNumber: String,
+        @Body fav: Favourite
+    ): Favourite
 
     @POST(DELETE_FAVOURITE_ENDPOINT)
-    suspend fun removeFavourite(@Path("accountNumber") accountNumber: String, @Body fav: Favourite) : Favourite
+    suspend fun removeFavourite(
+        @Path("accountNumber") accountNumber: String,
+        @Body fav: Favourite
+    ): Favourite
 
     @GET(GET_FAVOURITES_ENDPOINT)
-    suspend fun getFavourites(@Path("customerId") customerId: Int) : List<Favourite>
+    suspend fun getFavourites(
+        @Path("customerId") customerId: Int
+    ): List<Favourite>
 
     @POST(TRANSFER_ENDPOINT)
-    suspend fun transferMoney(@Body transferRequest: TransferRequest) : String
+    suspend fun transferMoney(
+        @Body transferRequest: TransferRequest
+    ): String
 }
