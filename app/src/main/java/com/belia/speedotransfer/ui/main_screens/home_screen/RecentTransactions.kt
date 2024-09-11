@@ -73,12 +73,12 @@ fun RecentTransactions(
             LazyColumn {
                 items(transactions) { item ->
                     TransactionItem(
-                        name = if(item.sender.name == userName)
-                            item.recipient.name else item.sender.name,
-                        cardDetails = if(item.sender.name == userName)
-                            "xxxx xxxx ${item.recipient.accountNumber.takeLast(4)}" else "xxxx xxxx ${item.sender.accountNumber.takeLast(4)}",
+                        name = if(item.senderName == userName)
+                            item.recipientName else item.senderName,
+                        cardDetails = if(item.senderName == userName)
+                            "xxxx xxxx ${item.recipientAccount.takeLast(4)}" else "xxxx xxxx ${item.senderAccount.takeLast(4)}",
                         transactionTime = formatDate(item.createdAt),
-                        transactionType = if(item.recipient.name == userName)
+                        transactionType = if(item.recipientName == userName)
                             "Received" else "Sent",
                         amount = item.amount.toInt(),
                         cardIcon = R.drawable.mastercard_logo
