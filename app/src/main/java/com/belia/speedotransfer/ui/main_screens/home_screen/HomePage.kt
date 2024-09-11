@@ -31,7 +31,6 @@ fun HomePage(
     viewModel.getUser(userId)
     val user by viewModel.user.collectAsState()
     val transactions = user.account.transactions
-    Log.d("trace", "HomePage: ${user.name}\n${user.account}")
     //val transactions = user!!.accounts[0].transactions
 
     Scaffold (
@@ -51,7 +50,7 @@ fun HomePage(
                 .padding(top = innerPadding.calculateTopPadding())
         )
         {
-            TopSection(name = user.name, navController)
+            TopSection(name = user.name, navController, transactions)
             BalanceCard(user.account.balance.toFloat())
             RecentTransactions(navController = navController, transactions = transactions, userName = user.name)
         }

@@ -3,6 +3,7 @@ package com.belia.speedotransfer.ui.common_ui
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -14,6 +15,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.belia.speedotransfer.ui.theme.GrayG10
@@ -26,6 +28,7 @@ fun RecipientTextField(
     title: String,
     placeholder: String,
     modifier: Modifier = Modifier,
+    isNumber: Boolean = false,
     onChange: (String) -> Unit
 ) {
     var value by remember { mutableStateOf("") }
@@ -60,8 +63,9 @@ fun RecipientTextField(
         shape = RoundedCornerShape(6.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .onFocusChanged {
-                isFocused = value.isNotBlank()
-            },
+            .onFocusChanged { isFocused = value.isNotBlank() },
+        keyboardOptions = if(isNumber)
+            KeyboardOptions(keyboardType = KeyboardType.Number) else
+            KeyboardOptions(keyboardType = KeyboardType.Text)
     )
 }

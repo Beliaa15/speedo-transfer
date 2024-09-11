@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.main_screens.home_screen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.model.Transaction
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.theme.GrayG100
 import com.belia.speedotransfer.ui.theme.GrayG40
@@ -37,6 +39,7 @@ import com.belia.speedotransfer.ui.theme.titleSemiBold
 fun TopSection(
     name: String,
     navController: NavController,
+    transactions: List<Transaction>,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -81,8 +84,10 @@ fun TopSection(
                 )
             }
         }
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(painter = painterResource(
+        IconButton(onClick = {
+            navController.navigate(AppRoutes.NOTIFICATIONS)
+        }) {
+            Image(painter = painterResource(
                 id = R.drawable.ic_notification),
                 contentDescription = "Notification icon",
             )

@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -99,7 +101,7 @@ fun RecipientInformation(
         Spacer(modifier = modifier.height(20.dp))
         RecipientTextField(title = "Recipient Name", placeholder = "Enter Recipient Name", onChange = onNameChange)
 
-        RecipientTextField(title = "Recipient Account", placeholder = "Enter Recipient Account Number", onChange = onAccountChange)
+        RecipientTextField(title = "Recipient Account", placeholder = "Enter Recipient Account Number", onChange = onAccountChange, isNumber = true)
 
         FavouriteBottomSheet(
             sharedViewModel = sharedViewModel,

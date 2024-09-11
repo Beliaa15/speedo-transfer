@@ -1,12 +1,16 @@
 package com.belia.speedotransfer.ui.main_screens.notifitcation_screen
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -16,18 +20,22 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
+import com.belia.speedotransfer.viewmodels.SharedViewModel
+import com.belia.speedotransfer.viewmodels.UserViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.belia.speedotransfer.util.formatDate
 
 @Composable
 fun NotificationScreen(
-    type: String,
-    amount: Float,
-    name: String,
-    account: String,
-    date: String,
-    time: String,
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: UserViewModel = viewModel()
 ) {
+    val userId by sharedViewModel.userId.collectAsState()
+    viewModel.getUser(userId)
+    val user by viewModel.user.collectAsState()
+    val transactions = user.account.transactions
     Scaffold (
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), navController = navController, hasIcon = true, title = "Notifications")
@@ -49,14 +57,16 @@ fun NotificationScreen(
                 )
         ) {
             LazyColumn {
-                items(3) {
+                items(transactions) { item -> 
                     NotificationItem(
-                        type,
-                        amount,
-                        name,
-                        account,
-                        date,
-                        time
+                        type = if(item.senderName == user.name)
+                            "Sent" else "Received",
+                        amount = item.amount,
+                        name = if(item.senderName == user.name)
+                            item.recipientName else item.senderName,
+                        account = if(item.senderName == user.name)
+                            item.recipientAccount else item.senderAccount,
+                        date = formatDate(item.createdAt),
                     )
                 }
             }
@@ -67,13 +77,13 @@ fun NotificationScreen(
 @Preview
 @Composable
 private fun NotificationScreenPrev() {
-    NotificationScreen(
-        type = "Received",
-        amount = 1000f,
-        name = "Asmaa Dosuky",
-        account = "1234 xxx",
-        date = "12 Jul 2024",
-        time = "09:00 AM",
-        navController = rememberNavController()
-    )
+//    NotificationScreen(
+//        type = "Received",
+//        amount = 1000f,
+//        name = "Asmaa Dosuky",
+//        account = "1234 xxx",
+//        date = "12 Jul 2024",
+//        time = "09:00 AM",
+//        navController = rememberNavController()
+//    )
 }

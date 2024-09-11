@@ -74,7 +74,7 @@ fun TransferCard(
                     modifier = modifier.padding(bottom = 8.dp)
                 )
                 Text(
-                    text = "Account $accountNum",
+                    text = "Account xxxx xxxx ${accountNum.takeLast(4)}",
                     style = bodyRegular16,
                     color = GrayG100,
                 )
@@ -89,6 +89,6 @@ private fun TransferCardPrev() {
     TransferCard(
         type = "From",
         name = "Asmaa Dosuky",
-        accountNum = "xxxx7890"
+        accountNum = "1234567893213"
     )
 }
