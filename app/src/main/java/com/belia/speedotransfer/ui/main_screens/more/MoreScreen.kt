@@ -43,12 +43,15 @@ import com.belia.speedotransfer.ui.main_screens.more.help.HelpBottomSheet
 import com.belia.speedotransfer.ui.theme.GrayG200
 import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.bodyMedium16
+import com.belia.speedotransfer.viewmodels.LoginViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MoreScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = viewModel()
 ) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
     var state = rememberModalBottomSheetState()
@@ -90,7 +93,7 @@ fun MoreScreen(
             }
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
             MoreItem(icon = R.drawable.logout, title = "Logout"){
-                /*TODO (End API session)*/
+                viewModel.logoutUser()
                 navController.navigate(AppRoutes.LOGIN){
                     popUpTo(AppRoutes.LOGIN) {
                         inclusive = true

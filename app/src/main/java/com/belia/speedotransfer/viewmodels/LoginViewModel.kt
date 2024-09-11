@@ -44,4 +44,18 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
+    fun logoutUser() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = APIService.callable.logout()
+            } catch (e: Exception) {
+                // Handle error (e.g., show error message)
+                errorMessage = e.message ?: "Logout failed"
+                Log.d("trace", "Error: $errorMessage")
+            } finally {
+                isLoading = false
+            }
+        }
+    }
 }

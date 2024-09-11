@@ -27,3 +27,7 @@ data class EditProfileRequest (
     @SerializedName("dateOfBirth")
     val dob: String = "",
 )
+
+data class Message(
+    val message: String,
+)

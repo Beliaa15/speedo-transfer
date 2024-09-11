@@ -23,10 +23,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -37,6 +39,7 @@ import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.GrayG100
 import com.belia.speedotransfer.ui.theme.GrayG900
+import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.linkMedium
@@ -82,9 +85,11 @@ fun Login(
 
         Text(
             text = "Speedo Transfer",
+            fontWeight = FontWeight.W600,
+            fontSize = 24.sp,
+            fontFamily = InterFontFamily,
             color = GrayG900,
             textAlign = TextAlign.Center,
-            style = titleSemiBold,
             modifier = modifier.fillMaxWidth()
         )
 
