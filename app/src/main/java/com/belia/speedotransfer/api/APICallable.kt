@@ -8,6 +8,7 @@ import com.belia.speedotransfer.constants.Constants.GET_FAVOURITES_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGIN_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGOUT_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.REGISTER_ENDPOINT
+import com.belia.speedotransfer.constants.Constants.TRANSFER_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.USER_ENDPOINT
 import com.belia.speedotransfer.model.ChangePasswordRequest
 import com.belia.speedotransfer.model.EditProfileRequest
@@ -15,6 +16,7 @@ import com.belia.speedotransfer.model.Favourite
 import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.model.LoginResponse
 import com.belia.speedotransfer.model.SignUpRequest
+import com.belia.speedotransfer.model.TransferRequest
 import com.belia.speedotransfer.model.User
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -49,4 +51,7 @@ interface APICallable {
 
     @GET(GET_FAVOURITES_ENDPOINT)
     suspend fun getFavourites(@Path("customerId") customerId: Int) : List<Favourite>
+
+    @POST(TRANSFER_ENDPOINT)
+    suspend fun transferMoney(@Body transferRequest: TransferRequest) : String
 }

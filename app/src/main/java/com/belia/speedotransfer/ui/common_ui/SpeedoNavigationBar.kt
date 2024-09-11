@@ -86,7 +86,7 @@ fun SpeedoNavigationBar(
                 NavigationBarItem(
                     selected = index == selectedItem,
                     onClick = {
-                        if(item.route.isNotEmpty())
+                        if(item.route.isNotEmpty() && index != selectedItem)
                             navController.navigate(item.route)
                     },
                     icon = {

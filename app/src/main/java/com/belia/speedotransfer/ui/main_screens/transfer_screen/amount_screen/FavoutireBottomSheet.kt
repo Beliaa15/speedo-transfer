@@ -37,6 +37,7 @@ import com.belia.speedotransfer.viewmodels.SharedViewModel
 fun FavouriteBottomSheet(
     isVisible: Boolean,
     onDismiss: () -> Unit,
+    onSelected: (List<String>) -> Unit,
     sharedViewModel: SharedViewModel,
     modifier: Modifier = Modifier,
     viewModel: FavouritesViewModel = viewModel(),
@@ -76,7 +77,10 @@ fun FavouriteBottomSheet(
                         items(favourites) { item ->
                             ASFavouriteItem(
                                 account = item.recipientAccount,
-                                name = item.recipientName
+                                name = item.recipientName,
+                                onClick = {
+                                    onSelected(it)
+                                }
                             )
                         }
                     }

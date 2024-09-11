@@ -27,13 +27,17 @@ import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 
 @Composable
-fun ASFavouriteItem(account: String, name: String, modifier: Modifier = Modifier) {
+fun ASFavouriteItem(
+    account: String,
+    name: String,
+    onClick: (List<String>) -> Unit,
+    modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp, vertical = 8.dp)
             .height(100.dp)
-            .clickable { /*TODO()*/ },
+            .clickable { onClick(listOf(name, account)) },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(containerColor = RedP50)
     ) {

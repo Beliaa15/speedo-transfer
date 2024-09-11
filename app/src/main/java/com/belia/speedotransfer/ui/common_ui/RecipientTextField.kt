@@ -28,7 +28,7 @@ fun RecipientTextField(
     modifier: Modifier = Modifier,
     onChange: (String) -> Unit
 ) {
-    var value by rememberSaveable { mutableStateOf("") }
+    var value by remember { mutableStateOf("") }
     var isFocused by remember { mutableStateOf(false) }
 
     Text(

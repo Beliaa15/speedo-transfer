@@ -97,7 +97,7 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
             val amount = it.arguments?.getFloat("amount") ?: 0f
             val name = it.arguments?.getString("name") ?: ""
             val account = it.arguments?.getString("account") ?: ""
-            ConfirmationScreen(amount, name, account, navController = navController)
+            ConfirmationScreen(amount, name, account, navController = navController, sharedViewModel)
         }
         composable(
             route = "$PAYMENT/{amount}/{name}/{account}",

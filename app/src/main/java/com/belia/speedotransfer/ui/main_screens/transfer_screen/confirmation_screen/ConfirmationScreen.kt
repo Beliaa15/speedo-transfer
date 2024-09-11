@@ -1,5 +1,7 @@
 package com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,12 +12,16 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
@@ -31,6 +37,11 @@ import com.belia.speedotransfer.ui.theme.GrayG500
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.util.sendNotification
+import com.belia.speedotransfer.viewmodels.SharedViewModel
+import com.belia.speedotransfer.viewmodels.TransferViewModel
+import com.belia.speedotransfer.viewmodels.UserViewModel
+import java.math.BigDecimal
 
 @Composable
 fun ConfirmationScreen(
@@ -38,8 +49,18 @@ fun ConfirmationScreen(
     name: String,
     account: String,
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: TransferViewModel = viewModel(),
+    userViewModel: UserViewModel = viewModel()
 ) {
+    val userId by sharedViewModel.userId.collectAsState()
+    userViewModel.getUser(userId)
+    val context = LocalContext.current
+    val user by userViewModel.user.collectAsState()
+    val currentBalance = user.account.balance
+    val userAccount = user.account.accountNumber
+    viewModel.amount = BigDecimal(amount.toString())
     Scaffold (
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), navController, hasIcon = true, title = "Transfer")
@@ -78,18 +99,27 @@ fun ConfirmationScreen(
             TotalAmount(amount = amount)
 
             TransferSection(
-                fromName = "Asmaa Dosuky",
-                fromAccountNum = "xxxx7890",
+                fromName = user.name,
+                fromAccountNum = "xxxx xxxx ${userAccount.takeLast(4)}",
                 toName = name,
-                toAccountNum = account,
+                toAccountNum = "xxxx xxxx ${account.takeLast(4)}",
                 image = R.drawable.ic_transfer
             )
 
             RedButton(
                 text = "Confirm",
                 onClick = {
-                    navController.navigate("$PAYMENT/$amount/$name/$account")
-                    // TODO: Add navigation to payment screen
+                    if(currentBalance >= amount){
+                        viewModel.transfer(userAccount, account)
+                        sendNotification(
+                            title = "Successful Transaction",
+                            text = "You have successfully sent $amount to $name",
+                            context = context
+                        )
+                        navController.navigate("$PAYMENT/$amount/$name/$account")
+                    } else {
+                        Toast.makeText(context, "Insufficient Balance", Toast.LENGTH_SHORT).show()
+                    }
                 },
                 modifier = modifier.padding(horizontal = 16.dp)
             )
@@ -109,5 +139,5 @@ fun ConfirmationScreen(
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 private fun TransferScreenPreview() {
-    ConfirmationScreen(amount = 1000f, "Jonathan Smith", "xxxx7890", rememberNavController())
+    //ConfirmationScreen(amount = 1000f, "Jonathan Smith", "xxxx7890", rememberNavController())
 }

@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,10 +21,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
+import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
 import com.belia.speedotransfer.ui.common_ui.RecipientTextField
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.RedP300
@@ -32,22 +37,22 @@ import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 @Composable
 fun RecipientInformation(
-    name: String,
-    account: String,
+    amount: String,
     onNameChange: (String) -> Unit,
     onAccountChange: (String) -> Unit,
     sharedViewModel: SharedViewModel,
+    navController: NavController,
+    onFavouriteClick: (List<String>) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
-
+    val context = LocalContext.current
     Column(
         modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Row(
-            //verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = modifier.fillMaxWidth()
         ) {
@@ -61,7 +66,10 @@ fun RecipientInformation(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = modifier
                     .clickable {
-                        isBottomSheetVisible = true
+                        if(amount.isBlank())
+                            Toast.makeText(context, "Enter an amount", Toast.LENGTH_SHORT).show()
+                        else
+                            isBottomSheetVisible = true
                     }
             ) {
                 Icon(
@@ -96,7 +104,12 @@ fun RecipientInformation(
         FavouriteBottomSheet(
             sharedViewModel = sharedViewModel,
             isVisible = isBottomSheetVisible,
-            onDismiss = {isBottomSheetVisible = false}
+            onDismiss = {isBottomSheetVisible = false},
+            onSelected = {
+                onFavouriteClick(it)
+                isBottomSheetVisible = false
+                navController.navigate("$CONFIRMATION/${amount.toFloat()}/${it[0]}/${it[1]}")
+            }
         )
     }
 }

@@ -7,12 +7,13 @@ import com.belia.speedotransfer.api.APIService
 import com.belia.speedotransfer.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class UserViewModel : ViewModel() {
     private val _user = MutableStateFlow<User>(User())
-    val user: MutableStateFlow<User> = _user
+    val user: StateFlow<User> = _user
 
     fun getUser(userId: Int) {
         viewModelScope.launch(Dispatchers.IO) {

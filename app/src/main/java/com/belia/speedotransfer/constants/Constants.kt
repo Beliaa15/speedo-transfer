@@ -11,5 +11,5 @@ object Constants {
     const val CREATE_FAVOURITE_ENDPOINT = "/api/v1/favourites/{accountNumber}"
     const val DELETE_FAVOURITE_ENDPOINT = "/api/v1/favourites/{accountNumber}"
     const val GET_FAVOURITES_ENDPOINT = "/api/v1/favourites/{customerId}"
-
+    const val TRANSFER_ENDPOINT = "/api/v1/account/transfer"
 }
