@@ -124,7 +124,7 @@ fun ProfileScreen(
                 title = "Settings",
                 subtitle = "Change your settings",
                 icon = R.drawable.ic_settings,
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(AppRoutes.SETTINGS) }
             )
             HorizontalDivider(
                 color = GrayG40,

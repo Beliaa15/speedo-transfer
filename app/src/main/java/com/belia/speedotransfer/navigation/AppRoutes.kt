@@ -9,7 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.belia.speedotransfer.navigation.AppRoutes.CHANGEPASSWORD
 import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
+import com.belia.speedotransfer.navigation.AppRoutes.EDITPROFILE
 import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
 import com.belia.speedotransfer.navigation.AppRoutes.HOME
 import com.belia.speedotransfer.navigation.AppRoutes.LOGIN
@@ -19,6 +21,7 @@ import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
 import com.belia.speedotransfer.navigation.AppRoutes.PROFILE
 import com.belia.speedotransfer.navigation.AppRoutes.PROFILEINFO
 import com.belia.speedotransfer.navigation.AppRoutes.SECONDSIGNUP
+import com.belia.speedotransfer.navigation.AppRoutes.SETTINGS
 import com.belia.speedotransfer.navigation.AppRoutes.SIGNUP
 import com.belia.speedotransfer.navigation.AppRoutes.SPLASH
 import com.belia.speedotransfer.navigation.AppRoutes.TRANSACTIONS
@@ -31,6 +34,9 @@ import com.belia.speedotransfer.ui.main_screens.more.MoreScreen
 import com.belia.speedotransfer.ui.main_screens.more.favourites.FavouriteScreen
 import com.belia.speedotransfer.ui.main_screens.more.profile.profile_screen.ProfileInfo
 import com.belia.speedotransfer.ui.main_screens.more.profile.profile_screen.ProfileScreen
+import com.belia.speedotransfer.ui.main_screens.more.profile.settings.ChangePasswordScreen
+import com.belia.speedotransfer.ui.main_screens.more.profile.settings.EditProfileScreen
+import com.belia.speedotransfer.ui.main_screens.more.profile.settings.SettingsScreen
 import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations.LastTransactions
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.AmountScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
@@ -54,6 +60,9 @@ object AppRoutes {
     const val ONBOARDING = "ondoarding"
     const val PROFILE = "profile"
     const val PROFILEINFO = "profileinfo"
+    const val SETTINGS = "settings"
+    const val CHANGEPASSWORD = "changepassword"
+    const val EDITPROFILE = "editprofile"
 }
 
 @Composable
@@ -102,5 +111,8 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
         composable(route = FAVOURITES) { FavouriteScreen(navController) }
         composable(route = PROFILE) { ProfileScreen(navController, sharedViewModel) }
         composable(route = PROFILEINFO) { ProfileInfo(navController, sharedViewModel) }
+        composable(route = SETTINGS) { SettingsScreen(navController) }
+        composable(route = CHANGEPASSWORD) { ChangePasswordScreen(navController) }
+        composable(route = EDITPROFILE) { EditProfileScreen(navController) }
     }
 }

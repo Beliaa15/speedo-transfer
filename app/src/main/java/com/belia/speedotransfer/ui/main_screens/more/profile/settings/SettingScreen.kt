@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG100
 import com.belia.speedotransfer.ui.theme.GrayG200
@@ -56,7 +57,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .height(80.dp)
                     .padding(horizontal = 16.dp)
-                    .clickable { },
+                    .clickable { navController.navigate(AppRoutes.CHANGEPASSWORD) },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
@@ -95,7 +96,7 @@ fun SettingsScreen(
                     .fillMaxWidth()
                     .height(80.dp)
                     .padding(horizontal = 16.dp)
-                    .clickable { },
+                    .clickable { navController.navigate(AppRoutes.EDITPROFILE) },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(

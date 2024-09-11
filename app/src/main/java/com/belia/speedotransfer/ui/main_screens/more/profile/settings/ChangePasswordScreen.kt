@@ -33,15 +33,7 @@ fun ChangePasswordScreen(
     var newPassword by remember { mutableStateOf("") }
     var isPasswordShown by remember { mutableStateOf(false) }
     var validPassword by remember { mutableStateOf(false) }
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE))
-                )
-            )
-    ) {
+
         Scaffold(
             topBar = {
                 TopBar(
@@ -51,7 +43,6 @@ fun ChangePasswordScreen(
                     hasIcon = true
                 )
             },
-            modifier = modifier.padding(horizontal = 16.dp)
         ) { innerPadding ->
             Column(
                 modifier = modifier
@@ -63,30 +54,37 @@ fun ChangePasswordScreen(
                         )
                     ),
             ) {
-                Spacer(modifier = modifier.height(32.dp))
-                PasswordTextField(
-                    text = "Current Password",
-                    isPasswordShown = isPasswordShown,
-                    onChange = { curPassword = it }
+                Column(
+                    modifier = modifier.padding(horizontal = 16.dp)
                 ) {
-                    validPassword = it
+                    Spacer(modifier = modifier.height(32.dp))
+                    PasswordTextField(
+                        text = "Current Password",
+                        isPasswordShown = isPasswordShown,
+                        onChange = { curPassword = it },
+                    ) {
+                        validPassword = it
+                    }
+                    PasswordTextField(
+                        text = "New Password",
+                        isPasswordShown = isPasswordShown,
+                        onChange = { newPassword = it }
+                    ) {
+                        validPassword = it
+                    }
+                    Spacer(modifier = modifier.height(24.dp))
+                    RedButton(
+                        text = "Save",
+                        onClick = {
+                            /*TODO(Add API to change password)*/
+                            navController.popBackStack()
+                        },
+                        isEnabled = curPassword.isNotBlank() && newPassword.isNotBlank() && validPassword
+                    )
                 }
-                PasswordTextField(
-                    text = "New Password",
-                    isPasswordShown = isPasswordShown,
-                    onChange = { newPassword = it }
-                ) {
-                    validPassword = it
-                }
-                Spacer(modifier = modifier.height(24.dp))
-                RedButton(
-                    text = "Save",
-                    onClick = { /*TODO*/ },
-                    isEnabled = curPassword.isNotBlank() && newPassword.isNotBlank() && validPassword
-                )
             }
         }
-    }
+
 }
 
 @Preview

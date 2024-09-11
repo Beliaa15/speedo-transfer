@@ -35,22 +35,30 @@ fun EditProfileScreen(
     var countryName by remember { mutableStateOf("") }
     var date by remember { mutableStateOf("") }
 
-    Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(
-                brush = Brush.linearGradient(
-                    listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE))
-                )
+
+    Scaffold(
+        topBar = {
+            TopBar(
+                color = Color(0xFFFFF8E7),
+                navController = navController,
+                title = "Edit Profile",
+                hasIcon = true
             )
-    ) {
-        Scaffold(
-            topBar = { TopBar(color = Color(0xFFFFF8E7), navController = navController, title = "Edit Profile", hasIcon = true) },
-            modifier = modifier.padding(horizontal = 16.dp)
-        ) { innerPadding ->
+        },
+    ) { innerPadding ->
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(
+                    brush = Brush.linearGradient(
+                        listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE))
+                    )
+                )
+        ) {
             Column(
                 modifier = modifier
                     .padding(top = innerPadding.calculateTopPadding())
+                    .padding(horizontal = 16.dp)
                     .fillMaxSize()
                     .background(
                         brush = Brush.linearGradient(
@@ -74,7 +82,10 @@ fun EditProfileScreen(
                 Spacer(modifier = modifier.height(24.dp))
                 RedButton(
                     text = "Save",
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        /*TODO(Add API call)*/
+                        navController.popBackStack()
+                    },
                     isEnabled = name.isNotBlank() && email.isNotBlank() && countryName.isNotBlank() && date.isNotBlank()
                 )
             }
