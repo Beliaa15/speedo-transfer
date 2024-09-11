@@ -1,13 +1,17 @@
 package com.belia.speedotransfer.api
 
 import com.belia.speedotransfer.constants.Constants.CHANGE_PASSWORD_ENDPOINT
+import com.belia.speedotransfer.constants.Constants.CREATE_FAVOURITE_ENDPOINT
+import com.belia.speedotransfer.constants.Constants.DELETE_FAVOURITE_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.EDIT_PROFILE_ENDPOINT
+import com.belia.speedotransfer.constants.Constants.GET_FAVOURITES_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGIN_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGOUT_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.REGISTER_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.USER_ENDPOINT
 import com.belia.speedotransfer.model.ChangePasswordRequest
 import com.belia.speedotransfer.model.EditProfileRequest
+import com.belia.speedotransfer.model.Favourite
 import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.model.LoginResponse
 import com.belia.speedotransfer.model.SignUpRequest
@@ -36,4 +40,13 @@ interface APICallable {
 
     @POST(EDIT_PROFILE_ENDPOINT)
     suspend fun editProfile(@Path("customerId") customerId: Int, @Body editProfileRequest: EditProfileRequest) : User
+
+    @POST(CREATE_FAVOURITE_ENDPOINT)
+    suspend fun createFavourite(@Path("accountNumber") accountNumber: String, @Body fav: Favourite) : Favourite
+
+    @POST(DELETE_FAVOURITE_ENDPOINT)
+    suspend fun removeFavourite(@Path("accountNumber") accountNumber: String, @Body fav: Favourite) : Favourite
+
+    @GET(GET_FAVOURITES_ENDPOINT)
+    suspend fun getFavourites(@Path("customerId") customerId: Int) : List<Favourite>
 }

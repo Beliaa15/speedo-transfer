@@ -83,7 +83,7 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
         composable(route = SIGNUP) { SignUp(navController) }
         composable(route = SECONDSIGNUP) { SecondSignUp(navController) }
         composable(route = HOME) { HomePage(navController, sharedViewModel) }
-        composable(route = TRANSFER) { AmountScreen(navController) }
+        composable(route = TRANSFER) { AmountScreen(navController, sharedViewModel) }
         composable(route = TRANSACTIONS) { LastTransactions(navController, sharedViewModel) }
         composable(route = MORE) { MoreScreen(navController) }
         composable(
@@ -110,9 +110,9 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
             val amount = it.arguments?.getFloat("amount") ?: 0f
             val name = it.arguments?.getString("name") ?: ""
             val account = it.arguments?.getString("account") ?: ""
-            PaymentScreen(amount, name, account, navController = navController)
+            PaymentScreen(amount, name, account, navController = navController, sharedViewModel)
         }
-        composable(route = FAVOURITES) { FavouriteScreen(navController) }
+        composable(route = FAVOURITES) { FavouriteScreen(navController, sharedViewModel) }
         composable(route = PROFILE) { ProfileScreen(navController, sharedViewModel) }
         composable(route = PROFILEINFO) { ProfileInfo(navController, sharedViewModel) }
         composable(route = SETTINGS) { SettingsScreen(navController) }

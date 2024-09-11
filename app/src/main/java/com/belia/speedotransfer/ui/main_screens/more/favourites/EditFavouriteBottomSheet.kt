@@ -24,19 +24,27 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.RecipientTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.viewmodels.FavouritesViewModel
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditFavouriteBottomSheet(
     isVisible: Boolean,
     onDismiss: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    favouritesViewModel: FavouritesViewModel = viewModel(),
+    sharedViewModel: SharedViewModel = viewModel(),
+    myAccount: String,
+    oldName: String,
+    oldAccount: String
 ) {
     if (isVisible) {
         val state = rememberModalBottomSheetState()
@@ -90,7 +98,10 @@ fun EditFavouriteBottomSheet(
                 RedButton(
                     text = "Save",
                     onClick = {
-                        // TODO: Handle save action
+                        val userId = sharedViewModel.userId.value
+                        favouritesViewModel.deleteFavourite(myAccount, oldName, oldAccount)
+                        favouritesViewModel.createFavourite(myAccount, name, account)
+                        favouritesViewModel.getFavourites(userId) // Reload the list
                         onDismiss()
                         Toast.makeText(context, "Edited Successfully", Toast.LENGTH_SHORT).show()
                     },

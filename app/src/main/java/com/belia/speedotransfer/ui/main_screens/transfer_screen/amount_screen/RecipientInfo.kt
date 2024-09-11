@@ -28,6 +28,7 @@ import com.belia.speedotransfer.ui.common_ui.RecipientTextField
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyMedium16
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 @Composable
 fun RecipientInformation(
@@ -35,6 +36,7 @@ fun RecipientInformation(
     account: String,
     onNameChange: (String) -> Unit,
     onAccountChange: (String) -> Unit,
+    sharedViewModel: SharedViewModel,
     modifier: Modifier = Modifier
 ) {
     var isBottomSheetVisible by remember { mutableStateOf(false) }
@@ -92,6 +94,7 @@ fun RecipientInformation(
         RecipientTextField(title = "Recipient Account", placeholder = "Enter Recipient Account Number", onChange = onAccountChange)
 
         FavouriteBottomSheet(
+            sharedViewModel = sharedViewModel,
             isVisible = isBottomSheetVisible,
             onDismiss = {isBottomSheetVisible = false}
         )
@@ -101,5 +104,5 @@ fun RecipientInformation(
 @Preview(showSystemUi = true)
 @Composable
 private fun RecipientInformationPreview() {
-    RecipientInformation("", "", {}, {})
+    //RecipientInformation("", "", {}, {})
 }

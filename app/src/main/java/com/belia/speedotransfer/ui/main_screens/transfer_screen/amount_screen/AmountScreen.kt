@@ -26,9 +26,13 @@ import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.StepProgressIndicator
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 @Composable
-fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun AmountScreen(
+    navController: NavController,
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier) {
     var amount by remember {
         mutableStateOf("")
     }
@@ -77,7 +81,8 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
                 name = recipientName,
                 account = recipientAccount,
                 onNameChange = { recipientName = it },
-                onAccountChange = { recipientAccount = it }
+                onAccountChange = { recipientAccount = it },
+                sharedViewModel= sharedViewModel,
             )
             RedButton(
                 text = "Continue", onClick = {
@@ -94,5 +99,5 @@ fun AmountScreen(navController: NavController, modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun AmountScreenPrev() {
-    AmountScreen(navController = rememberNavController())
+//    AmountScreen(navController = rememberNavController())
 }

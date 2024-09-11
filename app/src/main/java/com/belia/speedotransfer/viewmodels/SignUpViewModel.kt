@@ -31,10 +31,12 @@ class SignUpViewModel: ViewModel() {
             try {
                 val signUpRequest = SignUpRequest(name, email, password, confirmPassword, dateOfBirth, country)
                 val response = APIService.callable.register(signUpRequest)
+                isSignedUp = true
 
                 Log.d("trace", "signUp: ${response.name}")
             } catch (e: Exception) {
                 Log.d("trace", "Error: ${e.message}")
+                isSignedUp = false
             } finally {
                 isLoading = false
             }
