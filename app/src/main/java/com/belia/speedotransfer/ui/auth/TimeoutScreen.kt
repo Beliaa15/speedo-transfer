@@ -34,6 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
@@ -44,12 +45,16 @@ import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.bodyRegular12
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.heading3
+import com.belia.speedotransfer.viewmodels.LoginViewModel
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 
 @Composable
 fun TimeOut(
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: LoginViewModel = viewModel(),
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -67,7 +72,7 @@ fun TimeOut(
     ) {
         Spacer(modifier = modifier.height(55.dp))
 
-        if(showDialog){
+        if (showDialog) {
             InactivityCard(onDismiss = { showDialog = false })
         }
 
@@ -109,7 +114,7 @@ fun TimeOut(
 
         RedButton(
             text = "Sign in",
-            onClick = { /*TODO*/ },
+            onClick = { viewModel.loginUser() },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
         )
     }
@@ -162,6 +167,6 @@ fun InactivityCard(onDismiss: () -> Unit) {
 @Preview
 @Composable
 private fun TimeOutPrev() {
-    TimeOut(rememberNavController())
+    //TimeOut(rememberNavController())
 }
 
