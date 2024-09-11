@@ -1,9 +1,13 @@
 package com.belia.speedotransfer.api
 
+import com.belia.speedotransfer.constants.Constants.CHANGE_PASSWORD_ENDPOINT
+import com.belia.speedotransfer.constants.Constants.EDIT_PROFILE_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGIN_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.LOGOUT_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.REGISTER_ENDPOINT
 import com.belia.speedotransfer.constants.Constants.USER_ENDPOINT
+import com.belia.speedotransfer.model.ChangePasswordRequest
+import com.belia.speedotransfer.model.EditProfileRequest
 import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.model.LoginResponse
 import com.belia.speedotransfer.model.SignUpRequest
@@ -27,4 +31,9 @@ interface APICallable {
     @GET(USER_ENDPOINT)
     suspend fun getUser(@Path("customerId") customerId: Int): User
 
+    @POST(CHANGE_PASSWORD_ENDPOINT)
+    suspend fun changePassword(@Path("customerId") customerId: Int, @Body changePasswordRequest: ChangePasswordRequest) : User
+
+    @POST(EDIT_PROFILE_ENDPOINT)
+    suspend fun editProfile(@Path("customerId") customerId: Int, @Body editProfileRequest: EditProfileRequest) : User
 }

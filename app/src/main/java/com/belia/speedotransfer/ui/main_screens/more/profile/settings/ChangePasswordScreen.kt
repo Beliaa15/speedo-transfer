@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -18,17 +19,23 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
 import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
+import com.belia.speedotransfer.viewmodels.EditViewModel
+import com.belia.speedotransfer.viewmodels.SharedViewModel
 
 @Composable
 fun ChangePasswordScreen(
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: EditViewModel = viewModel()
 ) {
+    val userId by sharedViewModel.userId.collectAsState()
     var curPassword by remember { mutableStateOf("") }
     var newPassword by remember { mutableStateOf("") }
     var isPasswordShown by remember { mutableStateOf(false) }
@@ -61,14 +68,20 @@ fun ChangePasswordScreen(
                     PasswordTextField(
                         text = "Current Password",
                         isPasswordShown = isPasswordShown,
-                        onChange = { curPassword = it },
+                        onChange = {
+                            curPassword = it
+                            viewModel.oldpassword = it
+                                   },
                     ) {
                         validPassword = it
                     }
                     PasswordTextField(
                         text = "New Password",
                         isPasswordShown = isPasswordShown,
-                        onChange = { newPassword = it }
+                        onChange = {
+                            newPassword = it
+                            viewModel.newpassword = it
+                        }
                     ) {
                         validPassword = it
                     }
@@ -76,7 +89,7 @@ fun ChangePasswordScreen(
                     RedButton(
                         text = "Save",
                         onClick = {
-                            /*TODO(Add API to change password)*/
+                            viewModel.changePassword(userId)
                             navController.popBackStack()
                         },
                         isEnabled = curPassword.isNotBlank() && newPassword.isNotBlank() && validPassword
@@ -90,5 +103,5 @@ fun ChangePasswordScreen(
 @Preview
 @Composable
 private fun ASDASDsdas() {
-    ChangePasswordScreen(navController = rememberNavController())
+//    ChangePasswordScreen(navController = rememberNavController())
 }

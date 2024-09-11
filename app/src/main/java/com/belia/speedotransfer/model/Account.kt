@@ -1,5 +1,7 @@
 package com.belia.speedotransfer.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Account (
     val id: Int = 0,
     val accountNumber: String = "",
@@ -9,4 +11,19 @@ data class Account (
     val createdAt: String = "",
     val transactions: List<Transaction> = emptyList(),
     val updatedAt: String = ""
+)
+
+data class ChangePasswordRequest (
+    val oldPassword: String,
+    val newPassword: String,
+)
+
+data class EditProfileRequest (
+    val id: Int,
+    val updateDate : String = "",
+    val name: String,
+    val email: String,
+    val country: String,
+    @SerializedName("dateOfBirth")
+    val dob: String = "",
 )

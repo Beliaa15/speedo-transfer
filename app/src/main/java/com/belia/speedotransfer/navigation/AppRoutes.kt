@@ -112,7 +112,7 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
         composable(route = PROFILE) { ProfileScreen(navController, sharedViewModel) }
         composable(route = PROFILEINFO) { ProfileInfo(navController, sharedViewModel) }
         composable(route = SETTINGS) { SettingsScreen(navController) }
-        composable(route = CHANGEPASSWORD) { ChangePasswordScreen(navController) }
-        composable(route = EDITPROFILE) { EditProfileScreen(navController) }
+        composable(route = CHANGEPASSWORD) { ChangePasswordScreen(navController, sharedViewModel) }
+        composable(route = EDITPROFILE) { EditProfileScreen(navController, sharedViewModel) }
     }
 }

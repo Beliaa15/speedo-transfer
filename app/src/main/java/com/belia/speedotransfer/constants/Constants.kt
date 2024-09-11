@@ -5,4 +5,7 @@ object Constants {
     const val REGISTER_ENDPOINT = "api/v1/auth/register"
     const val LOGOUT_ENDPOINT = "api/v1/auth/logout"
     const val USER_ENDPOINT = "api/v1/account/{customerId}"
+    const val CHANGE_PASSWORD_ENDPOINT = "/api/v1/customers/password/{customerId}"
+    const val EDIT_PROFILE_ENDPOINT = "/api/v1/customers/data/{customerId}"
+
 }
