@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.belia.speedotransfer.model.Transaction
 import com.belia.speedotransfer.navigation.AppRoutes.CHANGEPASSWORD
 import com.belia.speedotransfer.navigation.AppRoutes.CONFIRMATION
 import com.belia.speedotransfer.navigation.AppRoutes.EDITPROFILE
@@ -24,6 +25,7 @@ import com.belia.speedotransfer.navigation.AppRoutes.SECONDSIGNUP
 import com.belia.speedotransfer.navigation.AppRoutes.SETTINGS
 import com.belia.speedotransfer.navigation.AppRoutes.SIGNUP
 import com.belia.speedotransfer.navigation.AppRoutes.SPLASH
+import com.belia.speedotransfer.navigation.AppRoutes.TRANSACTIONITEM
 import com.belia.speedotransfer.navigation.AppRoutes.TRANSACTIONS
 import com.belia.speedotransfer.navigation.AppRoutes.TRANSFER
 import com.belia.speedotransfer.ui.auth.Login
@@ -38,6 +40,7 @@ import com.belia.speedotransfer.ui.main_screens.more.profile.settings.ChangePass
 import com.belia.speedotransfer.ui.main_screens.more.profile.settings.EditProfileScreen
 import com.belia.speedotransfer.ui.main_screens.more.profile.settings.SettingsScreen
 import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations.LastTransactions
+import com.belia.speedotransfer.ui.main_screens.transactions_screen.transaction.Transaction
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.AmountScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.payment_screen.PaymentScreen
@@ -63,6 +66,7 @@ object AppRoutes {
     const val SETTINGS = "settings"
     const val CHANGEPASSWORD = "changepassword"
     const val EDITPROFILE = "editprofile"
+    const val TRANSACTIONITEM = "transactionitem"
 }
 
 @Composable
@@ -114,5 +118,14 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
         composable(route = SETTINGS) { SettingsScreen(navController) }
         composable(route = CHANGEPASSWORD) { ChangePasswordScreen(navController, sharedViewModel) }
         composable(route = EDITPROFILE) { EditProfileScreen(navController, sharedViewModel) }
+        composable(
+            route = "$TRANSACTIONITEM/{index}",
+            arguments = listOf(
+                navArgument("index") { type = NavType.IntType }
+            )
+        ) {
+            val index = it.arguments?.getInt("index") ?: 0
+            Transaction(navController, sharedViewModel, index)
+        }
     }
 }

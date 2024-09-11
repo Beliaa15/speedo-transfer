@@ -1,5 +1,6 @@
 package com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,10 +24,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.theme.DangerD300
 import com.belia.speedotransfer.ui.theme.GrayG0
@@ -49,8 +52,10 @@ fun TransactionItem(
     transactionType: String,
     transactionAmount: String,
     transactionStatus: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
     Box (
         modifier = modifier
             .background(
@@ -131,7 +136,12 @@ fun TransactionItem(
                 horizontalAlignment = Alignment.End
             ) {
                 IconButton(
-                    onClick = { /*TODO*/ },
+                    onClick = {
+                        if(transactionStatus)
+                            onClick()
+                        else
+                            Toast.makeText(context, "Failed transaction", Toast.LENGTH_LONG).show()
+                    },
                 ) {
                     Icon(
                         painter = painterResource(id = R.drawable.ic_back),
@@ -177,5 +187,6 @@ private fun TransactionItemPrev() {
         transactionType = "Received",
         transactionAmount = "1000",
         transactionStatus = true,
+        {}
     )
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
+import com.belia.speedotransfer.ui.main_screens.transactions_screen.transaction.Transaction
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.titleSemiBold
 import com.belia.speedotransfer.util.formatDate
@@ -41,6 +44,7 @@ fun LastTransactions(
     val user by viewModel.user.collectAsState()
     val userName = user.name
     val transactions = user.account.transactions
+    Log.d("trace", "LastTransactions: ${transactions.size}")
     Log.d("trace", "HomePage: ${user.name}\n${user.account}")
     Scaffold (
         topBar = {
@@ -71,7 +75,7 @@ fun LastTransactions(
             LazyColumn (
                 modifier = modifier.padding(16.dp)
             ) {
-                items(transactions) { item ->
+                itemsIndexed(transactions) { index, item ->
                     TransactionItem(
                         name = if(item.senderName == userName)
                             item.recipientName else item.senderName,
@@ -82,6 +86,11 @@ fun LastTransactions(
                             "Received" else "Sent",
                         transactionAmount = item.amount.toInt().toString(),
                         transactionStatus = item.success,
+                        onClick = {
+                            navController.navigate(
+                                "${AppRoutes.TRANSACTIONITEM}/$index"
+                            )
+                        }
                     )
                     Spacer(modifier = modifier.padding(8.dp))
                 }

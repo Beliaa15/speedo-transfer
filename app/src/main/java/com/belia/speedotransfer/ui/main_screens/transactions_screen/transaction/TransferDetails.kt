@@ -25,7 +25,6 @@ fun TransferDetails(
     amount: Float,
     reference: String,
     date: String,
-    time: String,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -71,7 +70,7 @@ fun TransferDetails(
                 )
                 Row {
                     Text(
-                        text = "$date $time",
+                        text = date,
                         style = bodyRegular16,
                         color = GrayG100,
                     )
@@ -84,5 +83,5 @@ fun TransferDetails(
 @Preview(showBackground = true)
 @Composable
 private fun TransferDetailsPrev() {
-    TransferDetails(1000f, "123456789876", "20 Jul 2024", "7:50")
+    TransferDetails(1000f, "123456789876", "20 Jul 2024 7:50", )
 }
