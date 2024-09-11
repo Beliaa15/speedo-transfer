@@ -11,12 +11,15 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
@@ -26,17 +29,24 @@ import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.viewmodels.SharedViewModel
+import com.belia.speedotransfer.viewmodels.UserViewModel
 
 @Composable
 fun ProfileInfo(
-    name: String,
-    email: String,
-    dob: String,
-    country: String,
-    account: String,
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: UserViewModel = viewModel(),
 ) {
+    val userId by sharedViewModel.userId.collectAsState()
+    viewModel.getUser(userId)
+    val user by viewModel.user.collectAsState()
+    val name = user.name
+    val email = user.email
+    val dob = user.dob
+    val country = user.country
+    val account = user.account.accountNumber
     Scaffold(
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), navController, title = "Profile Information", hasIcon = true)
@@ -123,14 +133,10 @@ fun InfoCard(
 @Preview(showBackground = true)
 @Composable
 private fun ProfileInfoPrev() {
-    ProfileInfo(
-        name = "Mohaned Emad",
-        email = "mohanedemad11@gmail.com",
-        dob = "10/03/2002",
-        country = "Egypt",
-        account = "1234xxxx",
-        rememberNavController()
-    )
+//    ProfileInfo(
+//
+//        rememberNavController()
+//    )
 //    InfoCard(
 //        title = "Full Name",
 //        subtitle = "Mohaned Emad"

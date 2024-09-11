@@ -19,6 +19,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
@@ -27,9 +29,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.GrayG100
@@ -41,13 +45,21 @@ import com.belia.speedotransfer.ui.theme.RedP50
 import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.viewmodels.SharedViewModel
+import com.belia.speedotransfer.viewmodels.UserViewModel
 
 @Composable
 fun ProfileScreen(
-    name: String,
     navController: NavController,
-    modifier: Modifier = Modifier
+    sharedViewModel: SharedViewModel,
+    modifier: Modifier = Modifier,
+    viewModel: UserViewModel = viewModel(),
 ) {
+    val userId by sharedViewModel.userId.collectAsState()
+    viewModel.getUser(userId)
+    val user by viewModel.user.collectAsState()
+    val name = user.name
+
     Scaffold(
         topBar = {
             TopBar(color = Color(0xFFFFF8E7), navController, title = "Profile", hasIcon = true)
@@ -102,7 +114,7 @@ fun ProfileScreen(
                 title = "Personal Information",
                 subtitle = "Your information",
                 icon = R.drawable.ic_user,
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(AppRoutes.PROFILEINFO) }
             )
             HorizontalDivider(
                 color = GrayG40,
@@ -122,7 +134,7 @@ fun ProfileScreen(
                 title = "Payment History",
                 subtitle = "View your transactions",
                 icon = R.drawable.ic_history,
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(AppRoutes.TRANSACTIONS) }
             )
             HorizontalDivider(
                 color = GrayG40,
@@ -132,7 +144,7 @@ fun ProfileScreen(
                 title = "My Favourites list",
                 subtitle = "View your favourites",
                 icon = R.drawable.ic_favorite,
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(AppRoutes.FAVOURITES) }
             )
         }
     }
@@ -152,7 +164,7 @@ fun CardScreen(
         modifier = modifier
             .fillMaxWidth()
             //.padding(16.dp)
-            .clickable { onClick }
+            .clickable { onClick() }
     ){
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -210,7 +222,7 @@ fun getInitials(name: String): String {
 @Preview(showBackground = true)
 @Composable
 private fun ProfileScreenPrev() {
-    ProfileScreen(name = "Asmaa Dosuky", rememberNavController())
+//    ProfileScreen()
 //    CardScreen(
 //        title = "Personal Information",
 //        subtitle = "Your information",

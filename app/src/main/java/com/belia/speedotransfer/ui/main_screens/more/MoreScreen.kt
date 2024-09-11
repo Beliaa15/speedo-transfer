@@ -36,6 +36,7 @@ import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
+import com.belia.speedotransfer.navigation.AppRoutes.PROFILE
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.main_screens.more.help.HelpBottomSheet
@@ -80,7 +81,9 @@ fun MoreScreen(
                 navController.navigate(FAVOURITES)
             }
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
-            MoreItem(icon = R.drawable.user, title = "Profile", hasSahm = true)
+            MoreItem(icon = R.drawable.user, title = "Profile", hasSahm = true){
+                navController.navigate(PROFILE)
+            }
             HorizontalDivider(modifier = modifier.padding(horizontal = 16.dp), color = GrayG40)
             MoreItem(icon = R.drawable.ic_help, title = "Help", hasSahm = true) {
                 isBottomSheetVisible = true

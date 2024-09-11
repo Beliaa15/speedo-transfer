@@ -1,6 +1,7 @@
 package com.belia.speedotransfer.ui.main_screens.home_screen
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,7 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.theme.GrayG100
 import com.belia.speedotransfer.ui.theme.GrayG40
 import com.belia.speedotransfer.ui.theme.GrayG900
@@ -33,6 +36,7 @@ import com.belia.speedotransfer.ui.theme.titleSemiBold
 @Composable
 fun TopSection(
     name: String,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -43,7 +47,8 @@ fun TopSection(
         verticalAlignment = Alignment.CenterVertically
     ){
         Row (
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier.clickable { navController.navigate(AppRoutes.PROFILE) },
         ){
             Box(
                 modifier = modifier
@@ -94,5 +99,5 @@ fun getInitials(name: String): String {
 @Preview(showBackground = true)
 @Composable
 private fun TopSectionPrev() {
-    TopSection(name = "Asmaa Dosuky")
+//    TopSection(name = "Asmaa Dosuky")
 }

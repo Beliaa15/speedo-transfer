@@ -51,7 +51,7 @@ fun HomePage(
                 .padding(top = innerPadding.calculateTopPadding())
         )
         {
-            TopSection(name = user.name)
+            TopSection(name = user.name, navController)
             BalanceCard(user.account.balance.toFloat())
             RecentTransactions(navController = navController, transactions = transactions, userName = user.name)
         }

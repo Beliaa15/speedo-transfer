@@ -16,6 +16,8 @@ import com.belia.speedotransfer.navigation.AppRoutes.LOGIN
 import com.belia.speedotransfer.navigation.AppRoutes.MORE
 import com.belia.speedotransfer.navigation.AppRoutes.ONBOARDING
 import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
+import com.belia.speedotransfer.navigation.AppRoutes.PROFILE
+import com.belia.speedotransfer.navigation.AppRoutes.PROFILEINFO
 import com.belia.speedotransfer.navigation.AppRoutes.SECONDSIGNUP
 import com.belia.speedotransfer.navigation.AppRoutes.SIGNUP
 import com.belia.speedotransfer.navigation.AppRoutes.SPLASH
@@ -27,6 +29,8 @@ import com.belia.speedotransfer.ui.auth.SignUp
 import com.belia.speedotransfer.ui.main_screens.home_screen.HomePage
 import com.belia.speedotransfer.ui.main_screens.more.MoreScreen
 import com.belia.speedotransfer.ui.main_screens.more.favourites.FavouriteScreen
+import com.belia.speedotransfer.ui.main_screens.more.profile.profile_screen.ProfileInfo
+import com.belia.speedotransfer.ui.main_screens.more.profile.profile_screen.ProfileScreen
 import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations.LastTransactions
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.amount_screen.AmountScreen
 import com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen.ConfirmationScreen
@@ -48,6 +52,8 @@ object AppRoutes {
     const val PAYMENT = "payment"
     const val FAVOURITES = "favourites"
     const val ONBOARDING = "ondoarding"
+    const val PROFILE = "profile"
+    const val PROFILEINFO = "profileinfo"
 }
 
 @Composable
@@ -94,5 +100,7 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
             PaymentScreen(amount, name, account, navController = navController)
         }
         composable(route = FAVOURITES) { FavouriteScreen(navController) }
+        composable(route = PROFILE) { ProfileScreen(navController, sharedViewModel) }
+        composable(route = PROFILEINFO) { ProfileInfo(navController, sharedViewModel) }
     }
 }
