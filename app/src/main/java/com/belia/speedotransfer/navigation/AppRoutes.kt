@@ -17,6 +17,7 @@ import com.belia.speedotransfer.navigation.AppRoutes.FAVOURITES
 import com.belia.speedotransfer.navigation.AppRoutes.HOME
 import com.belia.speedotransfer.navigation.AppRoutes.LOGIN
 import com.belia.speedotransfer.navigation.AppRoutes.MORE
+import com.belia.speedotransfer.navigation.AppRoutes.MYCARDS
 import com.belia.speedotransfer.navigation.AppRoutes.NOTIFICATIONS
 import com.belia.speedotransfer.navigation.AppRoutes.ONBOARDING
 import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
@@ -40,6 +41,7 @@ import com.belia.speedotransfer.ui.main_screens.more.profile.profile_screen.Prof
 import com.belia.speedotransfer.ui.main_screens.more.profile.settings.ChangePasswordScreen
 import com.belia.speedotransfer.ui.main_screens.more.profile.settings.EditProfileScreen
 import com.belia.speedotransfer.ui.main_screens.more.profile.settings.SettingsScreen
+import com.belia.speedotransfer.ui.main_screens.my_cards.MyCardsScreen
 import com.belia.speedotransfer.ui.main_screens.notifitcation_screen.NotificationScreen
 import com.belia.speedotransfer.ui.main_screens.transactions_screen.last_transcations.LastTransactions
 import com.belia.speedotransfer.ui.main_screens.transactions_screen.transaction.Transaction
@@ -70,6 +72,7 @@ object AppRoutes {
     const val EDITPROFILE = "editprofile"
     const val TRANSACTIONITEM = "transactionitem"
     const val NOTIFICATIONS = "notifications"
+    const val MYCARDS = "mycards"
 }
 
 @Composable
@@ -130,8 +133,7 @@ fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
             val index = it.arguments?.getInt("index") ?: 0
             Transaction(navController, sharedViewModel, index)
         }
-        composable(route = NOTIFICATIONS) { NotificationScreen(
-            navController, sharedViewModel
-        ) }
+        composable(route = NOTIFICATIONS) { NotificationScreen(navController, sharedViewModel) }
+        composable(route = MYCARDS) { MyCardsScreen(navController, sharedViewModel) }
     }
 }

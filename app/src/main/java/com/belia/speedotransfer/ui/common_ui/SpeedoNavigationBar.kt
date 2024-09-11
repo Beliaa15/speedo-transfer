@@ -58,7 +58,7 @@ fun SpeedoNavigationBar(
         ),
         BottomNavigationItem(
             title = "My cards",
-            route = "",
+            route = AppRoutes.MYCARDS,
             icon = ImageVector.vectorResource(id = R.drawable.ic_nav_mycards)
         ),
         BottomNavigationItem(
