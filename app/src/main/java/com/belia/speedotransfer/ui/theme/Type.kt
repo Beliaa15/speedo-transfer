@@ -135,6 +135,6 @@ val linkRegular = TextStyle(
 val smallRegular = TextStyle(
     fontFamily = InterFontFamily,
     fontWeight = FontWeight.Normal,
-    fontSize = 8.sp,
+    fontSize = 10.sp,
     lineHeight = 12.sp
 )

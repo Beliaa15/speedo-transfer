@@ -27,6 +27,8 @@ import com.belia.speedotransfer.ui.theme.GrayG0
 import com.belia.speedotransfer.ui.theme.GrayG200
 import com.belia.speedotransfer.ui.theme.InterFontFamily
 import com.belia.speedotransfer.ui.theme.RedP300
+import com.belia.speedotransfer.ui.theme.bodyRegular16
+import com.belia.speedotransfer.ui.theme.smallRegular
 
 data class BottomNavigationItem(
     val title: String,
@@ -100,8 +102,7 @@ fun SpeedoNavigationBar(
                         Text(
                             text = item.title,
                             color = if (index == selectedItem) RedP300 else GrayG200,
-                            fontFamily = InterFontFamily,
-                            fontWeight = FontWeight.Medium,
+                            style = smallRegular,
                             maxLines = 1,
                         )
                     },
