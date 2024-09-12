@@ -25,6 +25,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -37,6 +38,7 @@ import com.belia.speedotransfer.ui.theme.GrayG500
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.util.HandleErrors
 import com.belia.speedotransfer.util.sendNotification
 import com.belia.speedotransfer.viewmodels.SharedViewModel
 import com.belia.speedotransfer.viewmodels.TransferViewModel
@@ -61,77 +63,97 @@ fun ConfirmationScreen(
     val currentBalance = user.account.balance
     val userAccount = user.account.accountNumber
     viewModel.amount = BigDecimal(amount.toString())
-    Scaffold (
-        topBar = {
-            TopBar(color = Color(0xFFFFF8E7), navController, hasIcon = true, title = "Transfer")
-        },
-        bottomBar = {
-            SpeedoNavigationBar(selectedIndex = 1, navController)
+    val notFound by viewModel.notFound.collectAsState()
+    val internet by viewModel.networkError.collectAsState()
+
+    HandleErrors(viewModel = viewModel, onRetry = {
+        navController.navigate(AppRoutes.LOGIN) {
+            popUpTo(AppRoutes.LOGIN) {
+                inclusive = true
+            }
         }
-    ) {
-            innerPadding ->
-        Column (
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
-                    )
-                )
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-        ) {
-            StepProgressIndicator(currentStep = 2)
-            Spacer(modifier = modifier.padding(12.dp))
-            Text(
-                text = "${amount.toInt()} EGP",
-                style = titleSemiBold,
-                color = GrayG900,
-                modifier = modifier.padding(8.dp)
-            )
-            Text(
-                text = "Transfer amount",
-                style = bodyRegular16,
-                color = GrayG500,
-                modifier = modifier.padding(4.dp)
-            )
-            TotalAmount(amount = amount)
-
-            TransferSection(
-                fromName = user.name,
-                fromAccountNum = "xxxx xxxx ${userAccount.takeLast(4)}",
-                toName = name,
-                toAccountNum = "xxxx xxxx ${account.takeLast(4)}",
-                image = R.drawable.ic_transfer
-            )
-
-            RedButton(
-                text = "Confirm",
-                onClick = {
-                    if(currentBalance >= amount){
-                        viewModel.transfer(userAccount, account)
-                        sendNotification(
-                            title = "Successful Transaction",
-                            text = "You have successfully sent $amount to $name",
-                            context = context
+    }) {
+        Scaffold(
+            topBar = {
+                TopBar(color = Color(0xFFFFF8E7), navController, hasIcon = true, title = "Transfer")
+            },
+            bottomBar = {
+                SpeedoNavigationBar(selectedIndex = 1, navController)
+            }
+        ) { innerPadding ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.linearGradient(
+                            colors = listOf(Color(0xFFFFF8E7), Color(0xFFFFEAEE)),
                         )
-                        navController.navigate("$PAYMENT/$amount/$name/$account")
-                    } else {
-                        Toast.makeText(context, "Insufficient Balance", Toast.LENGTH_SHORT).show()
-                    }
-                },
-                modifier = modifier.padding(horizontal = 16.dp)
-            )
-            Spacer(modifier = modifier.padding(8.dp))
-            EmptyButton(
-                text = "Previous",
-                onClick = {
-                    navController.popBackStack()
-                    // TODO: Add navigation to amount screen
-                },
-                modifier = modifier.padding(horizontal = 16.dp)
-            )
+                    )
+                    .padding(innerPadding)
+                    .verticalScroll(rememberScrollState())
+            ) {
+                StepProgressIndicator(currentStep = 2)
+                Spacer(modifier = modifier.padding(12.dp))
+                Text(
+                    text = "${amount.toInt()} EGP",
+                    style = titleSemiBold,
+                    color = GrayG900,
+                    modifier = modifier.padding(8.dp)
+                )
+                Text(
+                    text = "Transfer amount",
+                    style = bodyRegular16,
+                    color = GrayG500,
+                    modifier = modifier.padding(4.dp)
+                )
+                TotalAmount(amount = amount)
+
+                TransferSection(
+                    fromName = user.name,
+                    fromAccountNum = "xxxx xxxx ${userAccount.takeLast(4)}",
+                    toName = name,
+                    toAccountNum = "xxxx xxxx ${account.takeLast(4)}",
+                    image = R.drawable.ic_transfer
+                )
+
+                RedButton(
+                    text = "Confirm",
+                    onClick = {
+                        if (notFound) {
+                            Toast.makeText(context, "User not found", Toast.LENGTH_SHORT).show()
+                        } else {
+                            if(!internet) {
+                                if (currentBalance >= amount) {
+                                    viewModel.transfer(userAccount, account)
+                                    sendNotification(
+                                        title = "Successful Transaction",
+                                        text = "You have successfully sent $amount to $name",
+                                        context = context
+                                    )
+                                    navController.navigate("$PAYMENT/$amount/$name/$account")
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Insufficient Balance",
+                                        Toast.LENGTH_SHORT
+                                    )
+                                        .show()
+                                }
+                            }
+                        }
+                    },
+                    modifier = modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = modifier.padding(8.dp))
+                EmptyButton(
+                    text = "Previous",
+                    onClick = {
+                        navController.popBackStack()
+                    },
+                    modifier = modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
     }
 }

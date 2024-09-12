@@ -27,7 +27,7 @@ import com.belia.speedotransfer.ui.theme.heading3
 
 
 @Composable
-fun NoInternetScreen() {
+fun NoInternetScreen(onRetry: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,12 +55,12 @@ fun NoInternetScreen() {
             modifier = Modifier.fillMaxWidth(0.8f)
         )
         Spacer(modifier = Modifier.height(32.dp))
-        RedButton(text = "Update", onClick = { /*TODO*/ })
+        RedButton(text = "Update", onClick = onRetry)
     }
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun PreviewNoInternetScreen() {
-    NoInternetScreen()
+//    NoInternetScreen()
 }

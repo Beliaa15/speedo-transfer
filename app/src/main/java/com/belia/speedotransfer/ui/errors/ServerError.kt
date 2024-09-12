@@ -1,6 +1,8 @@
 package com.belia.speedotransfer.ui.errors
 
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +33,8 @@ import com.belia.speedotransfer.ui.theme.heading3
 
 @Composable
 fun ErrorScreen(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -62,9 +67,22 @@ fun ErrorScreen(modifier: Modifier = Modifier) {
             modifier = modifier.padding(horizontal = 16.dp)
         )
         Spacer(modifier = Modifier.height(32.dp))
-        RedButton(text = "Call Us", onClick = { /*TODO*/ })
+        RedButton(text = "Call Us", onClick = {
+            val callIntent = Intent(Intent.ACTION_DIAL).apply {
+                data = Uri.parse("tel:000000")
+            }
+            context.startActivity(callIntent)
+        })
         Spacer(modifier = modifier.height(12.dp))
-        EmptyButton(text = "Message Us", onClick = { /*TODO*/ })
+        EmptyButton(text = "Message Us", onClick = {
+            val emailIntent = Intent(Intent.ACTION_SENDTO).apply {
+                data = Uri.parse("mailto:support@example.com")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf("support@example.com"))
+                putExtra(Intent.EXTRA_SUBJECT, "Support Request")
+                putExtra(Intent.EXTRA_TEXT, "I need help with...")
+            }
+            context.startActivity(Intent.createChooser(emailIntent, "Send Email"))
+        })
     }
 }
 

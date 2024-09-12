@@ -6,11 +6,14 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 fun formatDate(input: String): String {
+    // Define the formatter for parsing the input string
+    val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
+
     // Parse the input string to ZonedDateTime
-    val zonedDateTime = ZonedDateTime.parse(input)
+    val zonedDateTime = ZonedDateTime.parse(input, inputFormatter.withZone(ZoneOffset.UTC))
 
     // Convert ZonedDateTime to LocalDateTime
-    val localDateTime = zonedDateTime.withZoneSameInstant(ZoneOffset.UTC).toLocalDateTime()
+    val localDateTime = zonedDateTime.toLocalDateTime()
 
     // Get today's and yesterday's dates
     val today = LocalDate.now(ZoneOffset.UTC)

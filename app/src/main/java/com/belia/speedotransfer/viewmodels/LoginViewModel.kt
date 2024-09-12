@@ -13,9 +13,13 @@ import com.belia.speedotransfer.api.APIService
 import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.util.TokenManager
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
-class LoginViewModel(application: Application) : AndroidViewModel(application) {
+class LoginViewModel(application: Application) : ErrorViewModel(application) {
 
     var email by mutableStateOf("")
     var password by mutableStateOf("")
@@ -24,35 +28,44 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     var isLoggedIn by mutableStateOf(false)
     var userId by mutableIntStateOf(0)
 
+    private val _notFound = MutableStateFlow(false)
+    val notFound = _notFound.asStateFlow()
+
     private val tokenManager = TokenManager(application)
     val token = tokenManager.getToken()
 
     fun loginUser() {
         isLoading = true
         errorMessage = ""
+        _notFound.value = false
+        resetErrors()
+        resetNotFound()
 
-        // Launching coroutine for network call
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val loginRequest = LoginRequest(email, password)
                 val response = APIService.callable.login(loginRequest)
 
-                // Handle success response (e.g., store token)
                 isLoggedIn = true
                 userId = response.userId
-
                 tokenManager.saveToken(response.token)
 
-                // Log.d("trace", "loginUser: ${response.token}, ${response.userId}")
-                // Log.d("trace", "loginUser: ${tokenManager.getToken()}")
+            } catch (http: HttpException) {
+                if (http.code() == 400) {
+                    _notFound.value = true
+                } else {
+                    handleError(http)
+                }
             } catch (e: Exception) {
-                // Handle error (e.g., show error message)
-                errorMessage = e.message ?: "Login failed"
-                Log.d("trace", "Error: $errorMessage")
+                handleError(e)
             } finally {
                 isLoading = false
             }
         }
+    }
+
+    fun resetNotFound() {
+        _notFound.value = false
     }
 
     fun logoutUser() {
