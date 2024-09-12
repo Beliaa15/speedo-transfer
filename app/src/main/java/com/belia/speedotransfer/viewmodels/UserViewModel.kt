@@ -36,9 +36,9 @@ class UserViewModel (application: Application) : AndroidViewModel(application) {
                     Log.d("trace", "getUser: ${_user.value.id}")
             } catch (http: HttpException) {
                 if(http.code() == 401){
-                    Log.d("trace", "Error: ${http.message}")
+                    Log.d("trace", "Error1: ${http.message}")
                 } else {
-                    Log.d("trace", "Error: ${http.message()}")
+                    Log.d("trace", "Error2: ${http.message()}")
                 }
             } catch (e: Exception) {
                 Log.d("trace", "Error: ${e.message}")

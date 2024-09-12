@@ -33,42 +33,48 @@ interface APICallable {
     suspend fun register(@Body signUpRequest: SignUpRequest): User
 
     @POST(LOGOUT_ENDPOINT)
-    suspend fun logout()
+    suspend fun logout(@Header("token") token: String)
 
     @GET(USER_ENDPOINT)
     suspend fun getUser(@Header("token") token: String, @Path("customerId") customerId: Int): User
 
     @POST(CHANGE_PASSWORD_ENDPOINT)
     suspend fun changePassword(
+        @Header("token") token: String,
         @Path("customerId") customerId: Int,
         @Body changePasswordRequest: ChangePasswordRequest
     ): User
 
     @POST(EDIT_PROFILE_ENDPOINT)
     suspend fun editProfile(
+        @Header("token") token: String,
         @Path("customerId") customerId: Int,
         @Body editProfileRequest: EditProfileRequest
     ): User
 
     @POST(CREATE_FAVOURITE_ENDPOINT)
     suspend fun createFavourite(
+        @Header("token") token: String,
         @Path("accountNumber") accountNumber: String,
         @Body fav: Favourite
     ): Favourite
 
     @POST(DELETE_FAVOURITE_ENDPOINT)
     suspend fun removeFavourite(
+        @Header("token") token: String,
         @Path("accountNumber") accountNumber: String,
         @Body fav: Favourite
     ): Favourite
 
     @GET(GET_FAVOURITES_ENDPOINT)
     suspend fun getFavourites(
+        @Header("token") token: String,
         @Path("customerId") customerId: Int
     ): List<Favourite>
 
     @POST(TRANSFER_ENDPOINT)
     suspend fun transferMoney(
+        @Header("token") token: String,
         @Body transferRequest: TransferRequest
     ): String
 }

@@ -25,6 +25,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     var userId by mutableIntStateOf(0)
 
     private val tokenManager = TokenManager(application)
+    val token = tokenManager.getToken()
 
     fun loginUser() {
         isLoading = true
@@ -57,7 +58,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
     fun logoutUser() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = APIService.callable.logout()
+                val response = APIService.callable.logout(token!!)
             } catch (e: Exception) {
                 // Handle error (e.g., show error message)
                 errorMessage = e.message ?: "Logout failed"
