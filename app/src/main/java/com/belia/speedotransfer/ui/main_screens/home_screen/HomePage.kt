@@ -30,7 +30,6 @@ fun HomePage(
     viewModel.getUser(userId)
     val user by viewModel.user.collectAsState()
     val transactions = user.account.transactions
-    //val transactions = user!!.accounts[0].transactions
 
     Scaffold (
         bottomBar = {

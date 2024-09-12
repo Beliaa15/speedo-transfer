@@ -74,7 +74,7 @@ object AppRoutes {
 }
 
 @Composable
-fun AppNavHost(modifier: Modifier = Modifier, context: Context) {
+fun AppNavHost(context: Context) {
     val navController = rememberNavController()
     val sharedViewModel = SharedViewModel()
     NavHost(

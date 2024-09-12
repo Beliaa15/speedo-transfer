@@ -43,7 +43,6 @@ fun PasswordTextField(
     onChange: (String) -> Unit,
     isPasswordValid: (Boolean) -> Unit
 ) {
-    val context = LocalContext.current
     var tempPassword by rememberSaveable { mutableStateOf("") }
     var tempIsPasswordShown by remember { mutableStateOf(isPasswordShown) }
     var passwordConstraintsText by remember { mutableStateOf("") }

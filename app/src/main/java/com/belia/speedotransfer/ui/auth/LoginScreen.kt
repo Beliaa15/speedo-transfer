@@ -62,9 +62,6 @@ fun Login(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
-    val isLoading = viewModel.isLoading
-    //val loginSuccess = viewModel.isLoggedIn
-    val loginError = viewModel.errorMessage
     val notFound by viewModel.notFound.collectAsState()
     val context = LocalContext.current
 

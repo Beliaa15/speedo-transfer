@@ -1,6 +1,7 @@
 package com.belia.speedotransfer.constants
 
 object Constants {
+    // Waiting for BE team to send userId and deploy
     const val BASE_URL = "http://10.0.2.2:3000/"
     const val LOGIN_ENDPOINT = "api/v1/auth/login"
     const val REGISTER_ENDPOINT = "api/v1/auth/register"

@@ -25,7 +25,6 @@ class EditViewModel(application: Application) : AndroidViewModel(application) {
     var country by mutableStateOf("")
     var errorMessage by mutableStateOf("")
     var isLoading by mutableStateOf(false)
-    var isSignedUp by mutableStateOf(false)
 
     val tokenManager = TokenManager(application)
     val token = tokenManager.getToken()
