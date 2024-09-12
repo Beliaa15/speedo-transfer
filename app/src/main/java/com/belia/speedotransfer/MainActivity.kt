@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import com.belia.speedotransfer.navigation.AppNavHost
 import com.belia.speedotransfer.ui.theme.SpeedoTransferTheme
 
 class MainActivity : ComponentActivity() {
@@ -15,10 +16,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         createNotificationChannel(this)
         setContent {
-            SpeedoTransferTheme {
+            SpeedoTransferTheme (darkTheme = false) {
                 /*TODO
                    Add appNavigation host to start everything
                 */
+                AppNavHost(context = this)
             }
         }
     }
