@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import androidx.compose.ui.res.painterResource
 import androidx.core.app.NotificationManagerCompat
 import com.belia.speedotransfer.R
 

@@ -28,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -46,6 +45,7 @@ import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.RedP50
 import com.belia.speedotransfer.ui.theme.bodyMedium16
 import com.belia.speedotransfer.ui.theme.bodyRegular16
+
 object Countries {
     val nameWithFlags = listOf(
         "Afghanistan" to "https://flagsapi.com/AF/flat/64.png",

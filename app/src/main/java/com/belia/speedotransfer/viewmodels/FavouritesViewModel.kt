@@ -2,9 +2,7 @@ package com.belia.speedotransfer.viewmodels
 
 import android.app.Application
 import android.util.Log
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.belia.speedotransfer.api.APIService
 import com.belia.speedotransfer.model.Favourite

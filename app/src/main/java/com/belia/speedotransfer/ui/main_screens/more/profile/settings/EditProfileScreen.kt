@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
@@ -27,9 +28,7 @@ import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.viewmodels.EditViewModel
 import com.belia.speedotransfer.viewmodels.SharedViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.belia.speedotransfer.viewmodels.UserViewModel
-import java.time.LocalDateTime
 
 @Composable
 fun EditProfileScreen(

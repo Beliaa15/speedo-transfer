@@ -22,9 +22,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
+import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.navigation.AppRoutes.HOME
 import com.belia.speedotransfer.ui.common_ui.EmptyButton
 import com.belia.speedotransfer.ui.common_ui.RedButton
@@ -35,11 +36,9 @@ import com.belia.speedotransfer.ui.common_ui.TotalAmount
 import com.belia.speedotransfer.ui.common_ui.TransferSection
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.titleSemiBold
+import com.belia.speedotransfer.viewmodels.FavouritesViewModel
 import com.belia.speedotransfer.viewmodels.SharedViewModel
 import com.belia.speedotransfer.viewmodels.UserViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.belia.speedotransfer.navigation.AppRoutes
-import com.belia.speedotransfer.viewmodels.FavouritesViewModel
 
 @Composable
 fun PaymentScreen(

@@ -47,7 +47,6 @@ import com.belia.speedotransfer.ui.theme.RedP300
 import com.belia.speedotransfer.ui.theme.bodyRegular16
 import com.belia.speedotransfer.ui.theme.linkMedium
 import com.belia.speedotransfer.ui.theme.titleMedium
-import com.belia.speedotransfer.ui.theme.titleSemiBold
 import com.belia.speedotransfer.util.HandleErrors
 import com.belia.speedotransfer.viewmodels.LoginViewModel
 import com.belia.speedotransfer.viewmodels.SharedViewModel

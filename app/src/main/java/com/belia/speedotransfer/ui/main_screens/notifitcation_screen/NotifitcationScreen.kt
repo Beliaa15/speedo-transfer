@@ -1,6 +1,5 @@
 package com.belia.speedotransfer.ui.main_screens.notifitcation_screen
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,14 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
+import com.belia.speedotransfer.util.formatDate
 import com.belia.speedotransfer.viewmodels.SharedViewModel
 import com.belia.speedotransfer.viewmodels.UserViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.belia.speedotransfer.util.formatDate
 
 @Composable
 fun NotificationScreen(

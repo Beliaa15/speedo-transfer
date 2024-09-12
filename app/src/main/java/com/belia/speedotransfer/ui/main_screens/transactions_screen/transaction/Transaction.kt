@@ -25,8 +25,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.ui.common_ui.SpeedoNavigationBar
 import com.belia.speedotransfer.ui.common_ui.TopBar
@@ -40,7 +40,6 @@ import com.belia.speedotransfer.ui.theme.heading3
 import com.belia.speedotransfer.util.formatDate
 import com.belia.speedotransfer.viewmodels.SharedViewModel
 import com.belia.speedotransfer.viewmodels.UserViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun Transaction(

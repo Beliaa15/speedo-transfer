@@ -1,6 +1,5 @@
 package com.belia.speedotransfer.ui.main_screens.transfer_screen.confirmation_screen
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -23,7 +22,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.belia.speedotransfer.R
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.navigation.AppRoutes.PAYMENT

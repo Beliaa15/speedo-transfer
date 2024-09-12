@@ -6,12 +6,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.belia.speedotransfer.api.APIService
 import com.belia.speedotransfer.model.ChangePasswordRequest
 import com.belia.speedotransfer.model.EditProfileRequest
-import com.belia.speedotransfer.model.SignUpRequest
 import com.belia.speedotransfer.util.TokenManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
