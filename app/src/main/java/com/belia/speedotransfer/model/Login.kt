@@ -7,16 +7,14 @@ data class LoginRequest(
 
 data class LoginResponse(
     val token: String,
-    val userId: Int,
-    val userName: String,
+    val userId: String,
     val message: String
 )
 
 data class SignUpRequest(
-    val name: String,
     val email: String,
     val password: String,
-    val confirmPassword: String,
+    val name: String,
+    val country: String,
     val dateOfBirth: String,
-    val country: String
 )

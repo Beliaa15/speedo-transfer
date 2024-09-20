@@ -19,7 +19,7 @@ data class ChangePasswordRequest (
 )
 
 data class EditProfileRequest (
-    val id: Int,
+    val id: String,
     val updateDate : String = "",
     val name: String,
     val email: String,

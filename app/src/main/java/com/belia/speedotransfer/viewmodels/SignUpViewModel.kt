@@ -9,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.belia.speedotransfer.api.APIService
 import com.belia.speedotransfer.model.SignUpRequest
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class SignUpViewModel: ViewModel() {
@@ -18,28 +20,29 @@ class SignUpViewModel: ViewModel() {
     var confirmPassword by mutableStateOf("")
     var dateOfBirth by mutableStateOf("")
     var country by mutableStateOf("")
-    var errorMessage by mutableStateOf("")
     var isLoading by mutableStateOf(false)
-    var isSignedUp by mutableStateOf(false)
+    private val _isSignedUp = MutableStateFlow(false)
+    val isSignedUp = _isSignedUp.asStateFlow()
 
-    fun signUp(){
+    fun signUp(signUpRequest: SignUpRequest){
         isLoading = true
-        errorMessage = ""
 
         // Launching coroutine for network call
         viewModelScope.launch (Dispatchers.IO) {
             try {
-                val signUpRequest = SignUpRequest(name, email, password, confirmPassword, dateOfBirth, country)
                 val response = APIService.callable.register(signUpRequest)
-                isSignedUp = true
-
-                Log.d("trace", "signUp: ${response.name}")
+                _isSignedUp.value = true
+                Log.d("trace", "signUp: ${response.message}")
             } catch (e: Exception) {
-                Log.d("trace", "Error: ${e.message}")
-                isSignedUp = false
+                Log.d("trace", "SignUpError: ${e.localizedMessage}")
+                _isSignedUp.value = false
             } finally {
                 isLoading = false
             }
         }
+    }
+
+    fun resetIsSignedUp(){
+        _isSignedUp.value = false
     }
 }

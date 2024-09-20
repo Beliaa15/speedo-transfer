@@ -84,7 +84,7 @@ fun DatePicker(modifier: Modifier = Modifier, onClick: (String) -> Unit) {
                 var c = Calendar.getInstance()
                 c.timeInMillis =
                     it.selectedDateMillis!! // calender class is used to convert from ms to date
-                var dateFormatter = SimpleDateFormat("dd-MM-yyyy", Locale.US)
+                var dateFormatter = SimpleDateFormat("yyyy/MM/dd", Locale.US)
                 date = dateFormatter.format(c.time)
                 onClick(date)
                 isFocused = false

@@ -15,6 +15,7 @@ import com.belia.speedotransfer.model.EditProfileRequest
 import com.belia.speedotransfer.model.Favourite
 import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.model.LoginResponse
+import com.belia.speedotransfer.model.Message
 import com.belia.speedotransfer.model.SignUpRequest
 import com.belia.speedotransfer.model.TransferRequest
 import com.belia.speedotransfer.model.User
@@ -30,25 +31,25 @@ interface APICallable {
     suspend fun login(@Body loginRequest: LoginRequest): LoginResponse
 
     @POST(REGISTER_ENDPOINT)
-    suspend fun register(@Body signUpRequest: SignUpRequest): User
+    suspend fun register(@Body signUpRequest: SignUpRequest): Message
 
     @POST(LOGOUT_ENDPOINT)
     suspend fun logout(@Header("token") token: String)
 
     @GET(USER_ENDPOINT)
-    suspend fun getUser(@Header("token") token: String, @Path("customerId") customerId: Int): User
+    suspend fun getUser(@Header("token") token: String, @Path("customerId") customerId: String): User
 
     @POST(CHANGE_PASSWORD_ENDPOINT)
     suspend fun changePassword(
         @Header("token") token: String,
-        @Path("customerId") customerId: Int,
+        @Path("customerId") customerId: String,
         @Body changePasswordRequest: ChangePasswordRequest
     ): User
 
     @POST(EDIT_PROFILE_ENDPOINT)
     suspend fun editProfile(
         @Header("token") token: String,
-        @Path("customerId") customerId: Int,
+        @Path("customerId") customerId: String,
         @Body editProfileRequest: EditProfileRequest
     ): User
 
@@ -69,7 +70,7 @@ interface APICallable {
     @GET(GET_FAVOURITES_ENDPOINT)
     suspend fun getFavourites(
         @Header("token") token: String,
-        @Path("customerId") customerId: Int
+        @Path("customerId") customerId: String
     ): List<Favourite>
 
     @POST(TRANSFER_ENDPOINT)

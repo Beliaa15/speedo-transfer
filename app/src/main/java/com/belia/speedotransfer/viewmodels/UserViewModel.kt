@@ -20,7 +20,7 @@ class UserViewModel (application: Application) : AndroidViewModel(application) {
 
     val tokenManager = TokenManager(application)
 
-    fun getUser(userId: Int) {
+    fun getUser(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val token = tokenManager.getToken()

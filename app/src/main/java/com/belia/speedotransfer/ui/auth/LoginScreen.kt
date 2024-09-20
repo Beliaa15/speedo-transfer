@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +13,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -35,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
@@ -62,8 +67,29 @@ fun Login(
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
-    val notFound by viewModel.notFound.collectAsState()
     val context = LocalContext.current
+    val notFound by viewModel.notFound.collectAsState()
+    var isLoading by remember { mutableStateOf(false) }
+
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState()
+    LaunchedEffect(isLoggedIn) {
+        if (isLoggedIn) {
+            isLoading = false
+            viewModel.resetIsLoggedIn()
+            //val id = viewModel.userId
+            //sharedViewModel.setUserId(id)
+            Toast.makeText(context, "Logged In Successfully", Toast.LENGTH_SHORT).show()
+            navController.navigate(AppRoutes.HOME) {
+                popUpTo(AppRoutes.HOME) {
+                    inclusive = true
+                }
+            }
+        } else {
+            isLoading = false
+            Toast.makeText(context, "Wrong Email or Password", Toast.LENGTH_LONG).show()
+            viewModel.resetIsLoggedIn()
+        }
+    }
 
     HandleErrors(viewModel = viewModel, onRetry = { viewModel.loginUser() }) {
         Column(
@@ -122,10 +148,8 @@ fun Login(
             RedButton(
                 text = "Sign in",
                 onClick = {
-                    if (notFound) {
-                        Toast.makeText(context, "Wrong Email or Password", Toast.LENGTH_LONG).show()
-                    } else
-                        viewModel.loginUser()
+                    isLoading = true
+                    viewModel.loginUser()
                 },
                 isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
             )
@@ -155,13 +179,17 @@ fun Login(
             }
         }
     }
-    LaunchedEffect(key1 = viewModel.isLoggedIn) {
-        if (viewModel.isLoggedIn) {
-            val id = viewModel.userId
-            sharedViewModel.setUserId(id)
-            navController.navigate(AppRoutes.HOME)
+
+
+    if (isLoading) {
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+                .wrapContentSize(Alignment.Center)
+        ) {
+            IndeterminateCircularIndicator()
         }
-        viewModel.isLoggedIn = false
     }
 
 }

@@ -22,7 +22,7 @@ class FavouritesViewModel(application: Application) : AndroidViewModel(applicati
     val tokenManager = TokenManager(application)
     val token = tokenManager.getToken()
 
-    fun getFavourites(userId: Int) {
+    fun getFavourites(userId: String) {
         try {
             viewModelScope.launch(Dispatchers.IO) {
                 _favourites.update {

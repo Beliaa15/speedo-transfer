@@ -85,7 +85,17 @@ fun AppNavHost(context: Context) {
         composable(route = ONBOARDING) { OnboardingScreen(navController) }
         composable(route = LOGIN) { Login(navController, sharedViewModel) }
         composable(route = SIGNUP) { SignUp(navController) }
-        composable(route = SECONDSIGNUP) { SecondSignUp(navController) }
+        composable(route = "$SECONDSIGNUP/{name}/{email}/{password}",
+            arguments = listOf(navArgument("name") { type = NavType.StringType },
+                navArgument("email") { type = NavType.StringType },
+                navArgument("password") { type = NavType.StringType }
+            )) {
+            val name = it.arguments?.getString("name")!!
+            val email = it.arguments?.getString("email")!!
+            val password = it.arguments?.getString("password")!!
+            SecondSignUp(navController = navController, name = name, email = email, password = password)
+
+        }
         composable(route = HOME) { HomePage(navController, sharedViewModel) }
         composable(route = TRANSFER) { AmountScreen(navController, sharedViewModel) }
         composable(route = TRANSACTIONS) { LastTransactions(navController, sharedViewModel) }

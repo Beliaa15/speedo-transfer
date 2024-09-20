@@ -4,19 +4,28 @@ import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -30,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.belia.speedotransfer.model.SignUpRequest
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.CountryPicker
 import com.belia.speedotransfer.ui.auth.components.DatePicker
@@ -37,6 +47,7 @@ import com.belia.speedotransfer.ui.common_ui.RedButton
 import com.belia.speedotransfer.ui.common_ui.TopBar
 import com.belia.speedotransfer.ui.theme.BottomRose
 import com.belia.speedotransfer.ui.theme.GrayG100
+import com.belia.speedotransfer.ui.theme.GrayG70
 import com.belia.speedotransfer.ui.theme.GrayG700
 import com.belia.speedotransfer.ui.theme.GrayG900
 import com.belia.speedotransfer.ui.theme.InterFontFamily
@@ -50,11 +61,33 @@ import com.belia.speedotransfer.viewmodels.SignUpViewModel
 fun SecondSignUp(
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: SignUpViewModel = viewModel()
+    viewModel: SignUpViewModel = viewModel(),
+    name: String,
+    email: String,
+    password: String,
 ) {
     var countryName by rememberSaveable { mutableStateOf(viewModel.country) }
     var date by rememberSaveable { mutableStateOf(viewModel.dateOfBirth) }
+    var isLoading by remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val isSuccess by viewModel.isSignedUp.collectAsState()
+
+    LaunchedEffect(isSuccess) {
+        if (isSuccess) {
+            isLoading = false
+            viewModel.resetIsSignedUp()
+            Toast.makeText(context, "Signed Up Successfully", Toast.LENGTH_SHORT).show()
+            navController.navigate(AppRoutes.LOGIN) {
+                popUpTo(AppRoutes.LOGIN) {
+                    inclusive = true
+                }
+            }
+        } else {
+            isLoading = false
+            Toast.makeText(context, "Error Signing Up", Toast.LENGTH_SHORT).show()
+            viewModel.resetIsSignedUp()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -130,13 +163,9 @@ fun SecondSignUp(
             RedButton(
                 text = "Continue",
                 onClick = {
-                    viewModel.signUp()
-                    Toast.makeText(context, "Signed Up Successfully", Toast.LENGTH_SHORT).show()
-                    navController.navigate(AppRoutes.LOGIN) {
-                        popUpTo(AppRoutes.LOGIN) {
-                            inclusive = true
-                        }
-                    }
+                    isLoading = true
+                    val req = SignUpRequest(email, password, name, countryName, date)
+                    viewModel.signUp(req)
                 },
                 isEnabled = date.isNotBlank() && countryName.isNotBlank()
             )
@@ -167,10 +196,29 @@ fun SecondSignUp(
             }
         }
     }
+    if (isLoading) {
+        Box(
+            modifier = modifier
+                .fillMaxSize()
+                .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
+                .wrapContentSize(Alignment.Center)
+        ) {
+            IndeterminateCircularIndicator()
+        }
+    }
+}
+
+@Composable
+fun IndeterminateCircularIndicator() {
+    CircularProgressIndicator(
+        modifier = Modifier.width(64.dp),
+        color = RedP300,
+        trackColor = GrayG70
+    )
 }
 
 @Preview
 @Composable
 private fun prevvvv() {
-    SecondSignUp(rememberNavController())
+    //SecondSignUp(rememberNavController())
 }

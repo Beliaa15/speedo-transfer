@@ -22,8 +22,10 @@ class LoginViewModel(application: Application) : ErrorViewModel(application) {
     var password by mutableStateOf("")
     var errorMessage by mutableStateOf("")
     var isLoading by mutableStateOf(false)
-    var isLoggedIn by mutableStateOf(false)
-    var userId by mutableIntStateOf(0)
+    var userId by mutableStateOf("0")
+
+    private val _isLoggedIn = MutableStateFlow(false)
+    val isLoggedIn = _isLoggedIn.asStateFlow()
 
     private val _notFound = MutableStateFlow(false)
     val notFound = _notFound.asStateFlow()
@@ -42,11 +44,10 @@ class LoginViewModel(application: Application) : ErrorViewModel(application) {
             try {
                 val loginRequest = LoginRequest(email, password)
                 val response = APIService.callable.login(loginRequest)
-
-                isLoggedIn = true
+                _isLoggedIn.value = true
                 userId = response.userId
                 tokenManager.saveToken(response.token)
-
+                Log.d("trace", "loginUser: ${response.message}")
             } catch (http: HttpException) {
                 if (http.code() == 400) {
                     _notFound.value = true
@@ -63,6 +64,10 @@ class LoginViewModel(application: Application) : ErrorViewModel(application) {
 
     fun resetNotFound() {
         _notFound.value = false
+    }
+
+    fun resetIsLoggedIn() {
+        _isLoggedIn.value = false
     }
 
     fun logoutUser() {

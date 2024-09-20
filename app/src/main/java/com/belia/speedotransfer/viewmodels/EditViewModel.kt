@@ -29,7 +29,7 @@ class EditViewModel(application: Application) : AndroidViewModel(application) {
     val tokenManager = TokenManager(application)
     val token = tokenManager.getToken()
 
-    fun changePassword(userId: Int){
+    fun changePassword(userId: String){
         isLoading = true
         errorMessage = ""
 
@@ -51,7 +51,7 @@ class EditViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun editProfile(userId: Int){
+    fun editProfile(userId: String){
         isLoading = true
         errorMessage = ""
 

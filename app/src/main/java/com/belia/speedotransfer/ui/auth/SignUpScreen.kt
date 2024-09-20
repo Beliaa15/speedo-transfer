@@ -127,7 +127,7 @@ fun SignUp(
         RedButton(
             text = "Sign up",
             onClick = {
-                navController.navigate(AppRoutes.SECONDSIGNUP)
+                navController.navigate("${AppRoutes.SECONDSIGNUP}/$name/$email/$password")
             },
             isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword && passwordsMatch
         )
