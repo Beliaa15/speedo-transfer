@@ -34,10 +34,10 @@ interface APICallable {
     suspend fun register(@Body signUpRequest: SignUpRequest): Message
 
     @POST(LOGOUT_ENDPOINT)
-    suspend fun logout(@Header("token") token: String)
+    suspend fun logout(@Header("Authorization") token: String)
 
     @GET(USER_ENDPOINT)
-    suspend fun getUser(@Header("token") token: String, @Path("customerId") customerId: String): User
+    suspend fun getUser(@Header("Authorization") token: String): User
 
     @POST(CHANGE_PASSWORD_ENDPOINT)
     suspend fun changePassword(

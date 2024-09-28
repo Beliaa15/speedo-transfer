@@ -19,6 +19,7 @@ data class ChangePasswordRequest (
 )
 
 data class EditProfileRequest (
+    @SerializedName("userId")
     val id: String,
     val updateDate : String = "",
     val name: String,

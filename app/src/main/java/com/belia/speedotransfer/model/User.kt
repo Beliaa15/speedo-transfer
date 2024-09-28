@@ -3,12 +3,11 @@ package com.belia.speedotransfer.model
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    val id: Int = 0,
-    val name: String = "",
-    val email: String = "",
-    val country: String = "",
-    @SerializedName("dateOfBirth")
-    val dob: String = "",
-    @SerializedName("mainAccount")
+    @SerializedName("_id") val id: String = "0",
+    @SerializedName("name") val name: String = "",
+    @SerializedName("email") val email: String = "",
+    @SerializedName("country") val country: String = "",
+    @SerializedName("dateOfBirth") val dob: String = "",
+    @SerializedName("accounts") val accounts: List<Account> = emptyList(),
     val account: Account = Account()
 )

@@ -39,7 +39,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.belia.speedotransfer.model.LoginRequest
 import com.belia.speedotransfer.navigation.AppRoutes
 import com.belia.speedotransfer.ui.auth.components.EmailTextField
 import com.belia.speedotransfer.ui.auth.components.PasswordTextField
@@ -56,7 +55,6 @@ import com.belia.speedotransfer.util.HandleErrors
 import com.belia.speedotransfer.viewmodels.LoginViewModel
 import com.belia.speedotransfer.viewmodels.SharedViewModel
 
-
 @Composable
 fun Login(
     navController: NavController,
@@ -68,26 +66,29 @@ fun Login(
     var password by remember { mutableStateOf("") }
     var validPassword by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    val notFound by viewModel.notFound.collectAsState()
-    var isLoading by remember { mutableStateOf(false) }
+    val isLoading by viewModel.isLoading.collectAsState()
 
     val isLoggedIn by viewModel.isLoggedIn.collectAsState()
-    LaunchedEffect(isLoggedIn) {
+    val loginError by viewModel.loginError.collectAsState()
+
+    LaunchedEffect(isLoading) {
         if (isLoggedIn) {
-            isLoading = false
             viewModel.resetIsLoggedIn()
-            //val id = viewModel.userId
-            //sharedViewModel.setUserId(id)
-            Toast.makeText(context, "Logged In Successfully", Toast.LENGTH_SHORT).show()
+            val id = viewModel.userId
+            sharedViewModel.setUserId(id)
+            Toast.makeText(context, "Logged In Successfully as $id", Toast.LENGTH_SHORT).show()
             navController.navigate(AppRoutes.HOME) {
-                popUpTo(AppRoutes.HOME) {
+                popUpTo(AppRoutes.LOGIN) {
                     inclusive = true
                 }
             }
-        } else {
-            isLoading = false
-            Toast.makeText(context, "Wrong Email or Password", Toast.LENGTH_LONG).show()
-            viewModel.resetIsLoggedIn()
+        }
+    }
+
+    LaunchedEffect(loginError) {
+        loginError?.let { error ->
+            Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+            viewModel.resetLoginError()
         }
     }
 
@@ -106,11 +107,11 @@ fun Login(
                 color = GrayG900,
                 textAlign = TextAlign.Center,
                 style = titleMedium,
-                modifier = modifier
+                modifier = Modifier
                     .fillMaxWidth()
             )
 
-            Spacer(modifier = modifier.height(64.dp))
+            Spacer(modifier = Modifier.height(64.dp))
 
             Text(
                 text = "Speedo Transfer",
@@ -119,16 +120,15 @@ fun Login(
                 fontFamily = InterFontFamily,
                 color = GrayG900,
                 textAlign = TextAlign.Center,
-                modifier = modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(modifier = modifier.height(56.dp))
+            Spacer(modifier = Modifier.height(56.dp))
 
             EmailTextField {
                 email = it
                 viewModel.email = email
                 viewModel.resetErrors()
-                viewModel.resetNotFound()
             }
             PasswordTextField(
                 text = "Password",
@@ -137,18 +137,16 @@ fun Login(
                     password = it
                     viewModel.password = password
                     viewModel.resetErrors()
-                    viewModel.resetNotFound()
                 }
             ) {
                 validPassword = it
             }
 
-            Spacer(modifier = modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             RedButton(
                 text = "Sign in",
                 onClick = {
-                    isLoading = true
                     viewModel.loginUser()
                 },
                 isEnabled = email.isNotBlank() && password.isNotBlank() && validPassword
@@ -156,7 +154,7 @@ fun Login(
 
             Row(
                 horizontalArrangement = Arrangement.Center,
-                modifier = modifier
+                modifier = Modifier
                     .padding(all = 8.dp)
                     .fillMaxWidth()
             ) {
@@ -180,10 +178,9 @@ fun Login(
         }
     }
 
-
     if (isLoading) {
         Box(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(8.dp))
                 .wrapContentSize(Alignment.Center)
@@ -191,7 +188,6 @@ fun Login(
             IndeterminateCircularIndicator()
         }
     }
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)

@@ -3,7 +3,6 @@ package com.belia.speedotransfer.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
@@ -21,53 +20,59 @@ class LoginViewModel(application: Application) : ErrorViewModel(application) {
     var email by mutableStateOf("")
     var password by mutableStateOf("")
     var errorMessage by mutableStateOf("")
-    var isLoading by mutableStateOf(false)
     var userId by mutableStateOf("0")
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading = _isLoading.asStateFlow()
 
     private val _isLoggedIn = MutableStateFlow(false)
     val isLoggedIn = _isLoggedIn.asStateFlow()
 
-    private val _notFound = MutableStateFlow(false)
-    val notFound = _notFound.asStateFlow()
+    private val _loginError = MutableStateFlow<String?>(null)
+    val loginError = _loginError.asStateFlow()
 
     private val tokenManager = TokenManager(application)
     val token = tokenManager.getToken()
 
     fun loginUser() {
-        isLoading = true
+        _isLoading.value = true
         errorMessage = ""
-        _notFound.value = false
         resetErrors()
-        resetNotFound()
+        resetIsLoggedIn()
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val loginRequest = LoginRequest(email, password)
                 val response = APIService.callable.login(loginRequest)
-                _isLoggedIn.value = true
                 userId = response.userId
                 tokenManager.saveToken(response.token)
+                _isLoggedIn.value = true
                 Log.d("trace", "loginUser: ${response.message}")
             } catch (http: HttpException) {
-                if (http.code() == 400) {
-                    _notFound.value = true
+                if (http.code() == 401) {
+                    _isLoggedIn.value = false
+                    errorMessage = "Invalid email or password"
+                    _loginError.value = errorMessage
+                } else if (http.code() == 422)  {
+                    errorMessage = "Account not Found"
+                    _loginError.value = errorMessage
                 } else {
                     handleError(http)
                 }
             } catch (e: Exception) {
                 handleError(e)
             } finally {
-                isLoading = false
+                _isLoading.value = false
             }
         }
     }
 
-    fun resetNotFound() {
-        _notFound.value = false
-    }
-
     fun resetIsLoggedIn() {
         _isLoggedIn.value = false
+    }
+
+    fun resetLoginError() {
+        _loginError.value = null
     }
 
     fun logoutUser() {
@@ -79,7 +84,7 @@ class LoginViewModel(application: Application) : ErrorViewModel(application) {
                 errorMessage = e.message ?: "Logout failed"
                 Log.d("trace", "Error: $errorMessage")
             } finally {
-                isLoading = false
+                _isLoading.value = false
             }
         }
     }

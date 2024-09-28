@@ -18,26 +18,26 @@ class UserViewModel (application: Application) : AndroidViewModel(application) {
     private val _user = MutableStateFlow<User>(User())
     val user: StateFlow<User> = _user
 
-    val tokenManager = TokenManager(application)
+    private val tokenManager = TokenManager(application)
 
     fun getUser(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            val token = tokenManager.getToken()
+            val authToken = "Bearer $token"
             try {
-                val token = tokenManager.getToken()
-
                 if(token.isNullOrEmpty()){
                     Log.d("trace", "Token is null or empty")
                     return@launch
                 }
                 _user.update {
-                    APIService.callable.getUser(token, userId)
+                    APIService.callable.getUser(authToken)
                 }
-                    Log.d("trace", "getUser: ${_user.value.id}")
+                Log.d("trace", "getUser: ${_user.value.id}")
             } catch (http: HttpException) {
                 if(http.code() == 401){
-                    Log.d("trace", "Error1: ${http.message}")
+                    Log.d("trace", "Error1: ${http.message} and token is: $token")
                 } else {
-                    Log.d("trace", "Error2: ${http.message()}")
+                    Log.d("trace", "Error2: ${http.message()} and token is: $token")
                 }
             } catch (e: Exception) {
                 Log.d("trace", "Error: ${e.message}")
